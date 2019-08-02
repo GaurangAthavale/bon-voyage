@@ -14,9 +14,9 @@
 	    	<a class="navbar-brand" href="#">Bon Voyage</a>
 	    </div>
 	    <ul class="nav navbar-nav">
-	    	<li><a href="#"><span class="glyphicon glyphicon-plane"></span> Flights</a></li>
-	    	<li><a href="#"><i class="fa fa-train" aria-hidden="true"></i> Trains</a></li>
-	    	<li><a href="#"><span class=""></span>Hotels</a></li>
+	    	<li><a href="/flights"><span class="glyphicon glyphicon-plane"></span> Flights</a></li>
+	    	<li><a href="/trains"><i class="fa fa-train" aria-hidden="true"></i> Trains</a></li>
+	    	<li><a href="/hotels"><span class=""></span>Hotels</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 	    	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -24,6 +24,7 @@
 	    </ul>
 	  </div>
 	</nav>
+	{% block data %}
 	<div class="row">
 		<div class = "col-sm-6">
 			<h1>Simply the Best</h1>
@@ -64,6 +65,7 @@
 			<img class = "img-responsive" src="{{ url_for('static', filename='images/base-img.jpg') }}" alt="base image">
 		</div>
 	</div>
+	{% endblock %}
 	<nav class="navbar navbar-inverse fixed-bottom">
 		<div class="container-fluid">
 			<div class="navbar-header">
