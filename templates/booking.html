@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+{% endblock %}
+{% block data %}
+<body>
+    <div class="container-fluid">
+        <div class="row align-items-center justify-space-around">
+            <div class = "col-6">
+                <h1>Summary</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3><b>Details</b></h3>
+                            <br>
+                            <h4>BOM -> </h4>
+                            <br>
+                            <h4>DEL -> </h4>
+                            <br>
+                            <h4>Hotel</h4>
+                            <hr class=new1>
+                            <h4>Total</h4>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3><b>Price</b></h3>
+                            <br>
+                            <h4>Rs. 4000</h4>
+                            <br>
+                            <h4>Rs. 3000</h4>
+                            <br>
+                            <h4>Rs. 4000</h4>
+                            <hr class=new1>
+                            <h4>&#8377;11000</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card-wrapper"></div>
+                <div class="form-container active">
+                    <form action="">
+                        <input placeholder="Card number" type="tel" name="number">
+                        <input placeholder="Full name" type="text" name="name">
+                        <input placeholder="MM/YY" type="tel" name="expiry">
+                        <input placeholder="CVC" type="number" name="cvc">
+                        <h4><b>Amount: &#8377;11000</b></h4>
+                        <button type="button" class="btn btn-success" name="button">Pay now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/card.js') }}"></script>
+    <script>
+        new Card({
+            form: document.querySelector('form'),
+            container: '.card-wrapper'
+        });
+    </script>
+</body>
+{% endblock %}

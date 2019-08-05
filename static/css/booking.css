@@ -1,0 +1,37 @@
+body{
+    background: linear-gradient(105deg, #fff 55%, #93A9FF 45%);
+    /* background-image: url('/static/images/checkout-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; */
+}
+
+.container-fluid{
+    position: absolute;
+    top: 15%;
+    /* height: 30%; */
+    /* margin-top: -15%; */
+}
+
+.demo-container {
+    width: 100%;
+    max-width: 350px;
+    margin: 50px auto;
+}
+
+form {
+    margin: 30px;
+}
+
+input {
+    width: 70%;
+    padding: .5%;
+    margin: 3% auto;
+    display: block;
+}
+
+input[type=number] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}

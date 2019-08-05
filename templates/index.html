@@ -3,77 +3,90 @@
 <head>
 	<title>Bon Voyage</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	{% block stylesheets %}
+	{% endblock %}
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-	 <div class="container-fluid">
-	    <div class="navbar-header">
-	    	<a class="navbar-brand" href="#">Bon Voyage</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	    	<li><a href="/flights"><span class="glyphicon glyphicon-plane"></span> Flights</a></li>
-	    	<li><a href="/trains"><i class="fa fa-train" aria-hidden="true"></i> Trains</a></li>
-	    	<li><a href="/hotels"><span class=""></span>Hotels</a></li>
-	    </ul>
-	    <ul class="nav navbar-nav navbar-right">
-	    	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-	    	<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	    </ul>
-	  </div>
+	<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+		<a class="navbar-brand" href="/">Bon Voyage</a>
+		<div class="collapse navbar-collapse" id="navbarText">
+		    <ul class="navbar-nav mr-auto">
+		     	<li class="nav-item active">
+		        	<a class="nav-link" href="/flights">Flights</a>
+		      	</li>
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="/trains">Trains</a>
+		      	</li>
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="/hotels">Hotels</a>
+		      	</li>
+		    </ul>
+		    <span class="navbar-text">
+				<ul class="navbar-nav mr-auto">
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="/trains">Login</a>
+			      	</li>
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="/hotels">Sign Up</a>
+			      	</li>
+			    </ul>
+		    </span>
+		  </div>
 	</nav>
 	{% block data %}
-	<div class="row">
-		<div class = "col-sm-6">
-			<h1>Simply the Best</h1>
-			<h2>Why choose us?</h2>
-			<br><br>
-			<div class="row">
-				<div class="col-xs-4">
-					<img src="{{ url_for('static', filename='images/time.png') }}">
-					<h3>No need to surf multiple sites for travel plans</h3>
+	<div class="container-fluid">
+		<div class="row align-items-center">
+			<div class="col">
+				<h2>Simply the Best</h2>
+				<h3>Why choose us?</h3>
+				<br>
+				<div class="container-fluid">
+					<div class="row justify-content-around">
+						<div class="col">
+							<img src="{{ url_for('static', filename='images/time.png') }}">
+							<p>No need to surf multiple sites for travel plans</p>
+						</div>
+						<div class="col">
+							<img src="{{ url_for('static', filename='images/money.png') }}">
+							<p>Best price and value for money</p>
+						</div>
+						<div class="col">
+							<img src="{{ url_for('static', filename='images/hotel.png') }}">
+							<p>Finest handpicked hotels</p>
+						</div>
+					</div>
 				</div>
-				<div class="col-xs-4">
-					<img src="{{ url_for('static', filename='images/money.png') }}">
-					<h3>Best price and value for money</h3>
-				</div>
-				<div class="col-xs-4">
-					<img src="{{ url_for('static', filename='images/hotel.png') }}">
-					<h3>Finest handpicked hotels</h3>
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<img src="{{ url_for('static', filename='images/tailor-made.png') }}">
+							<p>Experienced travel experts</p>
+						</div>
+						<div class="col">
+							<img src="{{ url_for('static', filename='images/customer-service.png') }}">
+							<p>24/7 Customer service</p>
+						</div>
+						<div class="col">
+							<img src="{{ url_for('static', filename='images/wisdom.png') }}">
+							<p>We have wisdom that only comes through experience</p>
+						</div>
+					</div>
 				</div>
 			</div>
-			<br>
-			<div class="row">
-				<div class="col-xs-4">
-					<img src="{{ url_for('static', filename='images/tailor-made.png') }}">
-					<h3>Experienced travel experts</h3>
-				</div>
-				<div class="col-xs-4">
-					<img src="{{ url_for('static', filename='images/customer-service.png') }}">
-					<h3>24/7 Customer service</h3>
-				</div>
-				<div class="col-xs-4">
-					<img src="{{ url_for('static', filename='images/wisdom.png') }}">
-					<h3>We have wisdom that only comes through experience</h3>
-				</div>
+			<div class="col base-img">
+				<img src="{{ url_for('static', filename='images/base-img.jpg') }}" alt="">
 			</div>
-
-		</div>
-		<div class = "col-sm-6">
-			<img class = "img-responsive" src="{{ url_for('static', filename='images/base-img.jpg') }}" alt="base image">
 		</div>
 	</div>
 	{% endblock %}
-	<nav class="navbar navbar-inverse fixed-bottom">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">&#169; Bon Voyage 2019</a>
-			</div>
-		</div>
+	<nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-bottom">
+		<a class="navbar-brand" href="#">&#169; Bon Voyage 2019</a>
 	</nav>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
