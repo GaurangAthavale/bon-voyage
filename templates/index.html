@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index (1).css') }}">
 	{% block stylesheets %}
 	{% endblock %}
 </head>
@@ -14,14 +14,17 @@
 		<a class="navbar-brand" href="/">Bon Voyage</a>
 		<div class="collapse navbar-collapse" id="navbarText">
 		    <ul class="navbar-nav mr-auto">
-		     	<li class="nav-item active">
-		        	<a class="nav-link" href="/flights">Flights</a>
+		     	<li class="nav-item">
+		        	<!-- <a class="nav-link" href="/flights">Flights</a> -->
+					<span class="nav-link" id = "show-flt-srch">Flights</span>
+				</li>
+		      	<li class="nav-item">
+					<!-- <a class="nav-link" href="/trains">Trains</a> -->
+					<span class="nav-link" id = "show-trn-srch">Trains</span>
 		      	</li>
 		      	<li class="nav-item">
-		        	<a class="nav-link" href="/trains">Trains</a>
-		      	</li>
-		      	<li class="nav-item">
-		        	<a class="nav-link" href="/hotels">Hotels</a>
+					<!-- <a class="nav-link" href="/hotels" id = "show-htl-srch">Hotels</a> -->
+					<span class="nav-link" id = "show-htl-srch">Hotels</span>
 		      	</li>
 		    </ul>
 		    <span class="navbar-text">
@@ -39,7 +42,134 @@
 	{% block data %}
 	<div class="container-fluid">
 		<div class="row align-items-center">
-			<div class="col">
+			<div class = "col-sm-6 search-flights">
+				<div class="radio1">
+					<input type="radio" class="btn" name="check"><span>Round Trip</span>
+					<input type="radio" class="btn" name="check"><span>One Way Trip</span>
+				</div>
+				<div class="booking-form">
+					<label>From</label>
+					<br>
+					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<br>
+					<label>To</label>
+					<br>
+					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<div class="input-grp">
+						<label>Departure</label>
+						<input type="date" class="form-control select-date">
+					</div>
+					<div class="input-grp">
+						<label>Return</label>
+						<input type="date" class="form-control select-date">
+					</div>
+					<div class="input-grp">
+						<label>Adults(18+)</label>
+						<input type="number" class="form-control" value="1">
+					</div>
+					<div class="input-grp">
+						<label>Children(0-17)</label>
+						<input type="number" class="form-control" value="0">
+					</div>
+					<div class="input-grp">
+						<label>Class</label>
+						<select class="custom-select">
+							<option value="1">Economy Class</option>
+							<option value="2">Premium Economy Class</option>
+							<option value="3">Business Class</option>
+						</select>
+					</div>
+					<div class="input-grp">
+						<button class="btn btn-primary flight" type="button">Show Flights</button>
+					</div>
+				</div>
+			</div>
+			<div class = "col-sm-6 search-trains">
+				<div class="radio1">
+					<input type="radio" class="btn" name="check"><span>Round Trip</span>
+					<input type="radio" class="btn" name="check"><span>One Way Trip</span>
+				</div>
+				<div class="booking-form">
+					<label>From</label>
+					<br>
+					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<br>
+					<label>To</label>
+					<br>
+					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<div class="input-grp">
+						<label>Departure</label>
+						<input type="date" class="form-control select-date">
+					</div>
+					<div class="input-grp">
+						<label>Return</label>
+						<input type="date" class="form-control select-date">
+					</div>
+					<div class="input-grp">
+						<label>Adults(18+)</label>
+						<input type="number" class="form-control" value="1">
+					</div>
+					<div class="input-grp">
+						<label>Children(0-17)</label>
+						<input type="number" class="form-control" value="0">
+					</div>
+					<div class="input-grp">
+						<label>Class</label>
+						<select class="custom-select">
+							<option value="1">AC 3-Tier</option>
+							<option value="2">First Class</option>
+							<option value="3">AC Chair Car</option>
+							<option value="4">Sleeper</option>
+						</select>
+					</div>
+					<div class="input-grp">
+						<button class="btn btn-primary train" type="button">Show Trains</button>
+					</div>
+				</div>
+			</div>
+			<div class = "col-sm-6 search-hotels">
+				<!-- <div class="radio1">
+					<input type="radio" class="btn" name="check"><span>Round Trip</span>
+					<input type="radio" class="btn" name="check"><span>One Way Trip</span>
+				</div> -->
+				<div class="booking-form">
+					<label>Hotel</label>
+					<br>
+					<input type="text" class="ax form-control" placeholder="Hotel" size="458px">
+					<br>
+					<label>Area</label>
+					<br>
+					<input type="text" class="ax form-control" placeholder="Area" size="458px">
+					<div class="input-grp">
+						<label>Check In</label>
+						<input type="date" class="form-control select-date">
+					</div>
+					<div class="input-grp">
+						<label>Check Out</label>
+						<input type="date" class="form-control select-date">
+					</div>
+					<div class="input-grp">
+						<label>Adults(18+)</label>
+						<input type="number" class="form-control" value="1">
+					</div>
+					<div class="input-grp">
+						<label>Children(0-17)</label>
+						<input type="number" class="form-control" value="0">
+					</div>
+					<div class="input-grp">
+						<label>Class</label>
+						<select class="custom-select">
+							<option value="1">AC Room</option>
+							<option value="2">Non-AC Room</option>
+							<option value="3">Deluxe Room</option>
+						</select>
+					</div>
+					<div class="input-grp">
+						<button class="btn btn-primary hotel" type="button">Show Hotels</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 why-choose-us" id="mydiv">
 				<h2>Simply the Best</h2>
 				<h3>Why choose us?</h3>
 				<br>
@@ -76,7 +206,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col base-img">
+			<div class="col-sm-6 base-img">
 				<img src="{{ url_for('static', filename='images/base-img.jpg') }}" alt="">
 			</div>
 		</div>
@@ -88,5 +218,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>
