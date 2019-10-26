@@ -9,30 +9,116 @@
             <div class = "col-6">
                 <h1>Summary</h1>
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3><b>Details</b></h3>
-                            <br>
-                            <h4>BOM -> </h4>
-                            <br>
-                            <h4>DEL -> </h4>
-                            <br>
-                            <h4>Hotel</h4>
-                            <hr class=new1>
-                            <h4>Total</h4>
-                        </div>
-                        <div class="col-sm-6">
-                            <h3><b>Price</b></h3>
-                            <br>
-                            <h4>Rs. 4000</h4>
-                            <br>
-                            <h4>Rs. 3000</h4>
-                            <br>
-                            <h4>Rs. 4000</h4>
-                            <hr class=new1>
-                            <h4>&#8377;11000</h4>
-                        </div>
-                    </div>
+                    <table class = "table table-hover panel-group" id = "accordion">
+                        <thead>
+                            <th>Details</th>
+                            <th>Price</th>
+                        </thead>
+                        <tbody>
+                            <div class="panel panel-default">
+                                <tr>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">BOM - DEL</a></td>
+                                    <td>Rs. 4000</td>
+                                </tr>
+                                <tbody id = "collapse1" class="table panel-collapse collapse">
+                                    <tr>
+                                        <td>Base Fare</td>
+                                        <td>Rs. 3500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Taxes</td>
+                                        <td>Rs. 500</td>
+                                    </tr>
+                                </tbody>
+                            </div>
+                            <div class="panel panel-default">
+                                <tr>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">DEL - BOM</a></td>
+                                    <td>Rs. 3000</td>
+                                </tr>
+                                <tbody id = "collapse2" class="table panel-collapse collapse">
+                                    <tr>
+                                        <td>Base Fare</td>
+                                        <td>Rs. 2650</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Taxes</td>
+                                        <td>Rs. 350</td>
+                                    </tr>
+                                </tbody>
+                            </div>
+                            <div class="panel panel-default">
+                                <tr>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Hotel</a></td>
+                                    <td>Rs. 4000</td>
+                                </tr>
+                                <tbody id = "collapse3" class="table panel-collapse collapse">
+                                    <tr>
+                                        <td>Rs. 1600 x 2 nights</td>
+                                        <td>Rs. 3200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Taxes</td>
+                                        <td>Rs. 800</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td><b>Total</b></td>
+                                        <td><b>Rs. 11000</b></td>
+                                    </tr>
+                                </tbody>
+                            </div>
+                        </tbody>
+                    </table>
+<!--                 <table class = "table table-hover">
+                        <thead>
+                            <th>Details</th>
+                            <th>Price</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BOM - DEL</td>
+                                <td>Rs. 4000</td>
+                            </tr>
+                            <tr>
+                                <td>Base Fare</td>
+                                <td>Rs. 3500</td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td>Rs. 500</td>
+                            </tr>
+                            <tr>
+                                <td>DEL - BOM</td>
+                                <td>Rs. 3000</td>
+                            </tr>
+                            <tr>
+                                <td>Base Fare</td>
+                                <td>Rs. 2650</td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td>Rs. 350</td>
+                            </tr>
+                            <tr>
+                                <td>Hotel</td>
+                                <td>Rs. 4000</td>
+                            </tr>
+                            <tr>
+                                <td>Rs. 1600 x 2 nights</td>
+                                <td>Rs. 3200</td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td>Rs. 800</td>
+                            </tr>
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td><b>Rs. 11000</b></td>
+                            </tr>
+                        </tbody>
+                    </table> -->
                 </div>
             </div>
             <div class="col-6">
