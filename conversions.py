@@ -1,8 +1,20 @@
-airports = ['Ahmedabad','Amritsar','Bengaluru','Chennai','Cochin','Goa','Guwahati','Hyderabad','Kolkata','Mumbai','Delhi','Thiruvananthapuram','Port Blair','Nagpur','Jaipur','Lucknow','Varanasi','Mangalore','Coimbatore','Imphal','Vijayawada']
-ap_codes = ['AMD', 'ATQ', 'BLR', 'MAA', 'COK', 'GOI', 'GAU', 'HYD', 'CCU', 'BOM', 'DEL', 'TRV', 'IXZ', 'NAG', 'JAI', 'LKO', 'VNS', 'IXE', 'CJB', 'IMF', 'VGA']
+airports = ['Ahmedabad','Bengaluru','Chennai','Goa','Hyderabad','Kolkata','Mumbai','Delhi','Port Blair','Jaipur','Varanasi','Mangalore','Coimbatore']
+ap_codes = ['AMD', 'BLR', 'MAA', 'GOI', 'HYD', 'CCU', 'BOM', 'DEL', 'IXZ', 'JAI', 'VNS', 'IXE', 'CJB']
 
 ap_converter = dict()
 for i in range(len(airports)):
     ap_converter[ap_codes[i]] = airports[i]
 
-print(ap_converter)
+def find_flt_duration(dep, arr, dd, ad):
+    dep_hr, dep_min = list(map(int, dep.split(':')))
+    arr_hr, arr_min = list(map(int, arr.split(':')))
+    # print(dep_hr, arr_hr, dep_min, arr_min)
+    # print(dd, ad)
+    if ad > dd:
+        arr_hr += 24
+    hrs = arr_hr - dep_hr
+    mins = arr_min - dep_min
+    if mins < 0:
+        hrs -= 1
+        mins += 60
+    return '{:02d}'.format(hrs) + ':' + '{:02d}'.format(mins)

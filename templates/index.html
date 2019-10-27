@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/index (1).css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 	{% block stylesheets %}
 	{% endblock %}
 </head>
@@ -43,45 +43,47 @@
 	<div class="container-fluid">
 		<div class="row align-items-center">
 			<div class = "col-sm-6 search-flights">
+				<form action="/flights-display" method = "POST">
 				<div class="radio1">
-					<input type="radio" class="btn" name="check"><span>Round Trip</span>
-					<input type="radio" class="btn" name="check"><span>One Way Trip</span>
+					<input type="radio" class="btn" name="type" value = "round"><span>Round Trip</span>
+					<input type="radio" class="btn" name="type" value = "one"><span>One Way Trip</span>
 				</div>
 				<div class="booking-form">
 					<label>From</label>
 					<br>
-					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<input type="text" class="ax form-control" placeholder="City" size="458px" name="src">
 					<br>
 					<label>To</label>
 					<br>
-					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<input type="text" class="ax form-control" placeholder="City" size="458px" name="des">
 					<div class="input-grp">
 						<label>Departure</label>
-						<input type="date" class="form-control select-date">
+						<input type="date" class="form-control select-date" name="dep_date">
 					</div>
 					<div class="input-grp">
 						<label>Return</label>
-						<input type="date" class="form-control select-date">
+						<input type="date" class="form-control select-date" name="ret_date">
 					</div>
 					<div class="input-grp">
 						<label>Adults(18+)</label>
-						<input type="number" class="form-control" value="1">
+						<input type="number" class="form-control" value="1" name="adults">
 					</div>
 					<div class="input-grp">
 						<label>Children(0-17)</label>
-						<input type="number" class="form-control" value="0">
+						<input type="number" class="form-control" value="0" name="kids">
 					</div>
 					<div class="input-grp">
 						<label>Class</label>
-						<select class="custom-select">
-							<option value="1">Economy Class</option>
-							<option value="2">Premium Economy Class</option>
-							<option value="3">Business Class</option>
+						<select class="custom-select" name="class">
+							<option value="economy">Economy Class</option>
+							<option value="business">Business Class</option>
+							<option value="first_class">First Class</option>
 						</select>
 					</div>
 					<div class="input-grp">
-						<button class="btn btn-primary flight" type="button">Show Flights</button>
+						<button class="btn btn-primary flight" type="submit">Show Flights</button>
 					</div>
+				</form>
 				</div>
 			</div>
 			<div class = "col-sm-6 search-trains">

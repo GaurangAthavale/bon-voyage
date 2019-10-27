@@ -1,5 +1,6 @@
 from random import randint
 import pyrebase
+from conversions import find_flt_duration
 
 config = {
     "apiKey": "AIzaSyAiPuEH6tsR4h36GJKDzKtv87-2E9u0_oA",
@@ -13,46 +14,88 @@ db = firebase.database()
 
 airlines = ['air india', 'indigo', 'vistara', 'go air', 'jet airways', 'spicejet']
 iata_codes = ['AI', '6E', 'UK', 'G8', '9W', 'SG']
-ap_codes = ['AMD', 'ATQ', 'BLR', 'MAA', 'COK', 'GOI', 'GAU', 'HYD', 'CCU', 'BOM', 'DEL', 'TRV', 'IXZ', 'NAG', 'JAI', 'LKO', 'VNS', 'IXE', 'CJB', 'IMF', 'VGA']
+ap_codes = ['AMD', 'BLR', 'MAA', 'GOI', 'HYD', 'CCU', 'BOM', 'DEL', 'IXZ', 'JAI', 'VNS', 'IXE', 'CJB']
 
 def populate_flights(count):
     ids = db.child('flights').shallow().get()
     ids = list(ids.val())
-    for i in range(count):
-        data = dict()
-        comp_ind = randint(0, len(airlines) - 1)
-        data['airline'] = airlines[comp_ind]
-        data['fltno'] = iata_codes[comp_ind] + '-' + str(randint(101,999))
-        #avoid same flight number
-        while data['fltno'] in ids:
-            data['fltno'] = iata_codes[comp_ind] + '-' + str(randint(101,999))
-        ids.append(data['fltno'])
-        hr = randint(0, 23)
-        min = randint(0, 60)
-        data['dep'] = str(hr) + ':' + str(min)
-        #0 to 6 days monday to sunday
-        days = set()
-        freq = randint(1,5)
-        while len(days) < freq:
-            days.add(randint(0,6))
-        days = list(days)
-        data['dep_days'] = days
-        adder = randint(1,3)
-        hr += adder
-        min = randint(0, 60)        
-        if hr >= 24:
-            hr -= 24
-            days = [(x+1)%7 for x in days]
-        data['arr'] = str(hr) + ':' + str(min)
-        data['arr_days'] = days
-        src = randint(0, len(ap_codes) - 1)
-        des = randint(0, len(ap_codes) - 1)
-        while src == des:
-            src = randint(0, len(ap_codes) - 1)
-        data['src'] = ap_codes[src]
-        data['des'] = ap_codes[des]
-        print('populating', i)
-        print(data)
-        db.child('flights').child(data['fltno']).set(data)
+    for src_ind in range(len(ap_codes)):
+        for des_ind in range(len(ap_codes)):
+            if src_ind != des_ind:
+                for i in range(count):
+                    data = dict()
+                    comp_ind = randint(0, len(airlines) - 1)
+                    data['airline'] = airlines[comp_ind]
+                    data['fltno'] = iata_codes[comp_ind] + '-' + str(randint(101,999))
+                    #avoid same flight number
+                    while data['fltno'] in ids:
+                        data['fltno'] = iata_codes[comp_ind] + '-' + str(randint(101,999))
+                    ids.append(data['fltno'])
+                    hr = randint(0, 23)
+                    min = randint(0, 60)
+                    data['dep'] = '{:02d}'.format(hr) + ':' + '{:02d}'.format(min)
+                    #0 to 6 days monday to sunday
+                    days = set()
+                    freq = randint(4,7)
+                    while len(days) < freq:
+                        days.add(randint(0,6))
+                    days = list(days)
+                    data['dep_days'] = days
+                    adder = randint(1,3)
+                    hr += adder
+                    min = randint(0, 60)        
+                    if hr >= 24:
+                        hr -= 24
+                        days = [(x+1)%7 for x in days]
+                    data['arr'] = '{:02d}'.format(hr) + ':' + '{:02d}'.format(min)
+                    data['arr_days'] = days
+                    data['src'] = ap_codes[src_ind]
+                    data['des'] = ap_codes[des_ind]
+                    data['duration'] = find_flt_duration(data['dep'], data['arr'], data['dep_days'][0], data['arr_days'][0])
+                    fares = dict()
+                    fare = randint(3000,8000)
+                    fares['economy'] = fare
+                    adder = randint(500,2000)
+                    fare += adder
+                    fares['business'] = fare
+                    adder = randint(500,2000)
+                    fare += adder
+                    fares['first_class'] = fare
+                    data['fare'] = fares
+                    print('populating', data['src'], data['des'], i)
+                    print(data)
+                    db.child('flights').child(data['fltno']).set(data)
 
-populate_flights(5)
+#db.child('flights').child('dummy').set({'yo':'yooo'})
+populate_flights(3)
+
+#forgot to add fares previously "FACEPALM!!"
+
+# flights = db.child('flights').get()
+# counter = 1
+# for fl in flights.each():
+    # fares = dict()
+    # fare = randint(3000,8000)
+    # fares['economy'] = fare
+    # adder = randint(500,2000)
+    # fare += adder
+    # fares['business'] = fare
+    # adder = randint(500,2000)
+    # fare += adder
+    # fares['first_class'] = fare
+    # print('updating', counter)
+    # db.child('flights').child(fl.key()).update({'fare':fares})
+#     counter += 1
+
+#decided that its economically better to add duration than to calc everytime
+
+# flights = db.child('flights').get()
+# counter = 1
+# for fl in flights.each():
+#     info = fl.val()
+#     time = find_flt_duration(info['dep'], info['arr'], info['dep_days'][0], info['arr_days'][0])
+#     dep = '{:02d}'.format(int(info['dep'].split(':')[0])) + ':' + '{:02d}'.format(int(info['dep'].split(':')[1]))
+#     arr = '{:02d}'.format(int(info['arr'].split(':')[0])) + ':' + '{:02d}'.format(int(info['arr'].split(':')[1]))
+#     print('updating', counter)
+#     db.child('flights').child(fl.key()).update({'duration':time, 'dep':dep, 'arr':arr})
+#     counter += 1

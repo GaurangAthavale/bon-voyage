@@ -1,5 +1,6 @@
-import db-connections
-from flask import Flask, render_template
+from db_connections import find_flights
+from conversions import find_flt_duration
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -7,13 +8,28 @@ app = Flask(__name__)
 def hello_world():
     return render_template('index.html')
 
-@app.route('/flights-display')
+@app.route('/flights-display', methods = ["GET", "POST"])
 def show_flights():
-    return render_template('flights.html')
-
-@app.route('/flights')
-def find_flights():
-    return render_template('search-flights.html')
+    flights = []
+    if request.method == 'POST':
+        typ = request.form['type']
+        print(typ)
+        src = request.form['src']
+        print(src)
+        des = request.form['des']
+        print(des)
+        dep_date = request.form['dep_date']
+        print(dep_date)
+        ret_date = request.form['ret_date']
+        print(ret_date)
+        adults = request.form['adults']
+        print(adults)
+        kids = request.form['kids']
+        print(kids)
+        clas = request.form['class']
+        print(clas)
+        flights = find_flights(src, des, dep_date)
+    return render_template('flights.html', flights = flights, clas = clas)
 
 @app.route('/checkout')
 def checkout():
