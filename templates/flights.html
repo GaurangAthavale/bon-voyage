@@ -1,36 +1,173 @@
-{% extends 'index.html' %}
+    {% extends 'index.html' %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/flights.css') }}">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 {% endblock %}
 {% block data %}
-    {% for fl in flights %}
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-2">
-                {{ fl['airline'] }} <br> {{ fl['fltno'] }}
-            </div>
-            <div class="col-5">
-                <div class="container-fluid">
-                    <div class="row align-items-center justify-content-center inner-card">
-                        <div class="col-3">
-                            {{ fl['src'] }} <br>{{ fl['dep'] }}
-                        </div>
-                        <div class="col-5">
-                            {{ fl['duration'] }} hr <hr>
-                        </div>
-                        <div class="col-3">
-                            {{ fl['des'] }} <br>{{ fl['arr'] }}
-                        </div>
+    <div class="radio1">
+                    <input type="radio" class="btn" name="check" value="round" checked>Round Trip
+                    <input type="radio" class="btn" name="check" value="one">One Way Trip
+                </div>
+                <div class="booking-form">
+                    <div class="input-grp">
+                        <label>From</label>
+                        <input type="text" class="form-control" placeholder="City">
+                    </div>
+                    <div class="input-grp">
+                        <label>To</label>
+                        <input type="text" class="form-control" placeholder="City">
+                    </div>
+                    <!-- <label>From</label> -->
+                    <!-- <br> -->
+                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px">
+                    
+                    <label>To</label> -->
+                    <!-- <br> -->
+                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px"> -->
+                    
+                    <div class="input-grp">
+                        <label>Departure</label>
+                        <input type="date" class="form-control select-date">
+                    </div>
+                    <div class="input-grp">
+                        <label>Return</label>
+                        <input type="date" class="form-control select-date">
+                    </div>
+                    <div class="input-grp">
+                        <label>Passengers</label>
+                        <input type="number" class="form-control" value="1">
+                    </div>
+                    <!-- <label>Passengers</label> -->
+                    <!-- <br> -->
+                    <!-- <input type="number" class="ax form-control" value="1"> -->
+                    <!-- <div class="input-grp">
+                        <label>Children(0-17)</label>
+                        <input type="number" class="form-control" value="0">
+                    </div> -->
+                    
+                    <div class="input-grp">
+                        <label>Class</label>
+                        <select class="custom-select" name="class">
+                            <option value="economy">Economy Class</option>
+                            <option value="business">Business Class</option>
+                            <option value="first_class">First Class</option>
+                        </select>
+                    </div>
+                    <div class="input-grp">
+                        <button class="btn btn-primary form-control flight" type="button">Show Flights</button>
                     </div>
                 </div>
+                <hr>
+     <div class="row">           
+    <div class="col-sm-2">
+        <h2>Filters</h2>
+
+    </div>
+    <div class="vl"></div>
+    <div class="col-sm-9 trip" id="one">
+        {% for fl in flights %}
+        <div class="container-fluid">
+            <div class="row align-items-center a">
+                    <div class="col-2">
+                        {{ fl['airline'] }} <br> {{ fl['fltno'] }}
+                        <!-- Jet Airways <br> 9W 512 -->
+                    </div>
+                    <div class="col-5">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center inner-card a">
+                                <div class="col-3">
+                                    {{ fl['src'] }} <br>{{ fl['dep'] }}
+                                    <!-- DEL <br>18:10 -->
+                                </div>
+                                <div class="col-5">
+                                    {{ fl['duration'] }} hr <hr>
+                                    <!-- 01:55 hr <hr> -->
+                                </div>
+                                <div class="col-3">
+                                    {{ fl['des'] }} <br>{{ fl['arr'] }}
+                                    <!-- BOM <br>20:05 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <!-- &#8377;2012 -->
+                        &#8377;{{ fl['fare'][clas] }}
+                    </div>
+                    <div class="col-3 align-self-center">
+                        <button class="btn btn-primary">Book now</button>
+                    </div>
+
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+   <!--  <div class="col-sm-9 trip" id="round">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="container-fluid">
+            <div class="row align-items-center a">
+                    <div class="col-2">
+                        Jet Airways <br> 9W 512
+                    </div>
+                    <div class="col-5">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center inner-card a">
+                                <div class="col-3">
+                                    DEL <br>18:10
+                                </div>
+                                <div class="col-5">
+                                    01:55 hr <hr>
+                                </div>
+                                <div class="col-3">
+                                    BOM <br>20:05
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        &#8377;2012
+                    </div>
+                    <div class="col-3 align-self-center">
+                        <button class="btn btn-primary">Book now</button>
+                    </div>
             </div>
-            <div class="col-2 align-self-center">
-                &#8377;{{ fl['fare'][clas] }}
-            </div>
-            <div class="col-3 align-self-center">
-                <button class="btn btn-primary">Book now</button>
+        </div>
+    </div> 
+            <div class="col-sm-6">
+                <div class="container-fluid">
+            <div class="row align-items-center a">
+                    <div class="col-2">
+                        Jet Airways <br> 9W 313
+                    </div>
+                    <div class="col-5">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center inner-card a">
+                                <div class="col-3">
+                                    BOM <br>18:10
+                                </div>
+                                <div class="col-5">
+                                    01:55 hr <hr>
+                                </div>
+                                <div class="col-3">
+                                    DEL <br>20:05
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        &#8377;2012
+                    </div>
+                    <div class="col-3 align-self-center">
+                        <button class="btn btn-primary">Book now</button>
+                    </div>
+
             </div>
         </div>
     </div>
-    {% endfor %}
+    </div>
+</div> -->
 {% endblock %}

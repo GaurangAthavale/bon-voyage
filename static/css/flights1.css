@@ -1,0 +1,21 @@
+.row{
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    /* width: 95%; */
+    margin: 2%;
+    padding: 1%;
+    font-size: 1.5em;
+}
+
+.inner-card .col-3, .col-5{
+    padding: 0;
+}
+
+hr{
+    border: 2px dashed grey;
+}
+
+.btn{
+    font-size: 1.5vw;
+}

@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/flights.css') }}">
+{% endblock %}
+{% block data %}
+    {% for fl in flights %}
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-2">
+                {{ fl['airline'] }} <br> {{ fl['fltno'] }}
+            </div>
+            <div class="col-5">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-center inner-card">
+                        <div class="col-3">
+                            {{ fl['src'] }} <br>{{ fl['dep'] }}
+                        </div>
+                        <div class="col-5">
+                            {{ fl['duration'] }} hr <hr>
+                        </div>
+                        <div class="col-3">
+                            {{ fl['des'] }} <br>{{ fl['arr'] }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 align-self-center">
+                &#8377;{{ fl['fare'][clas] }}
+            </div>
+            <div class="col-3 align-self-center">
+                <button class="btn btn-primary">Book now</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

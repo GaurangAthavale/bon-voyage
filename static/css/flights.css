@@ -1,11 +1,11 @@
-.row{
+.a{
     background: #fff;
     border: 2px solid #000;
     border-radius: 10px;
-    /* width: 95%; */
+    width: 100%; 
     margin: 2%;
     padding: 1%;
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 
 .inner-card .col-3, .col-5{
@@ -13,9 +13,86 @@
 }
 
 hr{
-    border: 2px dashed grey;
+    border: 2px dashed black;
 }
 
-.btn{
+.vl{
+  border-right: 1px solid black;
+  height: 500px;
+}
+/*.btn{
     font-size: 1.5vw;
+}*/
+
+
+.radio1{
+    margin: 0 20px;
+}
+
+.radio1 .btn{
+      margin: 20px 10px 20px 0;
+    box-shadow: none;
+}
+
+.radio1 .btn::after{
+    content: '';
+    height: 15px;
+    width: 15px;
+    top: -2px;
+    left: -1px;
+    background-color: white;
+    position: relative;
+    display: inline-block;
+    border: 3px solid black;
+}
+
+.radio1 .btn:checked::after{
+    content: '';
+    background-color: #000;
+    transition: 0.5s;
+}
+
+.radio1 span{
+    color: #000;
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+.booking-form{
+    padding: 0 20px 20px;
+}
+
+.booking-form label{
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #000;
+}
+/*
+.input-grp{
+    width: 20%;
+    display: inline-block;
+    margin-left: 0%
+    
+}*/
+
+.form-control{
+     font-size: 18px; 
+     border-radius: 1px; 
+    background: transparent;
+    border-color: #000;
+}
+
+.input-grp button{
+    width:100%;
+    font-size: 18px;
+    border-color: #000;
+}
+
+.ab{
+    background: #fff;
+}
+
+.flight{
+    background: rgb(27, 74, 247);
 }
