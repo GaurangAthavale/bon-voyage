@@ -1,4 +1,5 @@
 from db_connections import find_flights
+from trains_scrape import find_trains
 from conversions import find_flt_duration
 from flask import Flask, render_template, request
 
