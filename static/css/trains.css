@@ -16,14 +16,6 @@ hr{
     border: 2px dashed black;
 }
 
-.hr1{
-    border: 1px dashed black;
-}
-
-.v input{
-    width: 100%;
-}
-
 .vl{
   border-right: 1px solid black;
   height: 500px;
@@ -32,15 +24,10 @@ hr{
     font-size: 1.5vw;
 }*/
 
-.input-grp button{
-    color: #000;
-}
-
 .but button{
     font-size: 1em;
     color: #000;
 }
-
 
 .radio1{
     margin: 0 20px;
@@ -85,6 +72,7 @@ hr{
     font-size: 18px;
     color: #000;
 }
+
 /*
 .input-grp{
     width: 20%;
@@ -101,9 +89,7 @@ hr{
 }
 
 .input-grp button{
-    width:100%;
-    font-size: 18px;
-    border-color: #000;
+    color: #000;
 }
 
 .ab{

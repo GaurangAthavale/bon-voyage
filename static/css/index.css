@@ -6,7 +6,8 @@ body{
     background: #93A9FF;
     text-align: center;
     padding: 0;
-    font-size: 1vw;
+    /*font-size: 1vw;*/
+    font-size: 20px;
 }
 
 .navbar{
@@ -37,7 +38,7 @@ body{
 
 .search-flights {   
     border: 1px solid black;
-    margin-left: 0%;
+    /*margin-left: 0%;*/
 }
 
 .search-trains {   
@@ -48,6 +49,10 @@ body{
     border: 1px solid black;
 }
 
+.input-grp button{
+    color:#000 ;
+    background: rgb(27, 74, 247);
+}
 
 .radio1{
     margin: 0 20px;
@@ -79,17 +84,19 @@ body{
 .radio1 span{
     color: #000;
     margin-right: 5px;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .booking-form{
     padding: 0 20px 20px;
+    /*padding-left: 0px;*/
+    /*padding-right: 0px;*/
 }
 
 .booking-form label{
     margin-bottom: 5px;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 20px;
     color: #000;
 }
 
@@ -101,13 +108,15 @@ body{
     width: 229px;
     display: inline-block;
     margin-left: 0%
+
     
 }
 
 .form-control{
-    /* font-size: 12px; */
+     font-size: 20px; 
     /* border-radius: 0; */
     background: transparent;
+    border-color: #000;
 }
 
 .ax{

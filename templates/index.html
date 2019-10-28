@@ -16,15 +16,15 @@
 		    <ul class="navbar-nav mr-auto">
 		     	<li class="nav-item">
 		        	<!-- <a class="nav-link" href="/flights">Flights</a> -->
-					<span class="nav-link" id = "show-flt-srch">Flights</span>
+					<span class="nav-link" id = "show-flt-srch"><i class="fa fa-plane" aria-hidden="true"></i> Flights</span>
 				</li>
 		      	<li class="nav-item">
 					<!-- <a class="nav-link" href="/trains">Trains</a> -->
-					<span class="nav-link" id = "show-trn-srch">Trains</span>
+					<span class="nav-link" id = "show-trn-srch"><i class="fa fa-train" aria-hidden="true"></i> Trains</span>
 		      	</li>
 		      	<li class="nav-item">
 					<!-- <a class="nav-link" href="/hotels" id = "show-htl-srch">Hotels</a> -->
-					<span class="nav-link" id = "show-htl-srch">Hotels</span>
+					<span class="nav-link" id = "show-htl-srch"><i class="fa fa-home" aria-hidden="true"></i> Hotels</span>
 		      	</li>
 		    </ul>
 		    <span class="navbar-text">
@@ -46,7 +46,7 @@
 				<form action="/flights-display" method = "POST">
 				<div class="radio1">
 					<input type="radio" class="btn" name="type" value = "round"><span>Round Trip</span>
-					<input type="radio" class="btn" name="type" value = "one"><span>One Way Trip</span>
+					<input type="radio" class="btn" name="type" value = "one" checked="checked"><span>One Way Trip</span>
 				</div>
 				<div class="booking-form">
 					<label>From</label>
@@ -80,14 +80,14 @@
 					<br>
 					<div class="input-grp">
 						<label>Class</label>
-						<select class="custom-select" name="class">
+						<select class="form-control" name="class">
 							<option value="economy">Economy Class</option>
 							<option value="business">Business Class</option>
 							<option value="first_class">First Class</option>
 						</select>
 					</div>
 					<div class="input-grp">
-						<button class="btn btn-primary flight" type="submit">Show Flights</button>
+						<button class="form-control flight" type="submit">Show Flights</button>
 					</div>
 				</form>
 				</div>
@@ -95,7 +95,7 @@
 			<div class = "col-sm-6 search-trains">
 				<div class="radio1">
 					<input type="radio" class="btn" name="check"><span>Round Trip</span>
-					<input type="radio" class="btn" name="check"><span>One Way Trip</span>
+					<input type="radio" class="btn" name="check" checked="checked"><span>One Way Trip</span>
 				</div>
 				<div class="booking-form">
 					<label>From</label>
@@ -126,7 +126,7 @@
 					<br>
 					<div class="input-grp">
 						<label>Class</label>
-						<select class="custom-select">
+						<select class="form-control">
 							<option value="1">AC 3-Tier</option>
 							<option value="2">First Class</option>
 							<option value="3">AC Chair Car</option>
@@ -134,7 +134,7 @@
 						</select>
 					</div>
 					<div class="input-grp">
-						<button class="btn btn-primary train" type="button">Show Trains</button>
+						<button class="form-control train" type="button">Show Trains</button>
 					</div>
 				</div>
 			</div>
@@ -172,14 +172,14 @@
 					<br>
 					<div class="input-grp">
 						<label>Class</label>
-						<select class="custom-select">
+						<select class="form-control">
 							<option value="1">AC Room</option>
 							<option value="2">Non-AC Room</option>
 							<option value="3">Deluxe Room</option>
 						</select>
 					</div>
 					<div class="input-grp">
-						<button class="btn btn-primary hotel" type="button">Show Hotels</button>
+						<button class="form-control hotel" type="button">Show Hotels</button>
 					</div>
 				</div>
 			</div>

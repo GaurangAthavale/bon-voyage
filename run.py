@@ -32,6 +32,14 @@ def show_flights():
         flights = find_flights(src, des, dep_date)
     return render_template('flights.html', flights = flights, clas = clas)
 
+@app.route('/trains-display')
+def show_trains():
+    return render_template('trains.html')
+
+@app.route('/hotels-display')
+def show_hotels():
+    return render_template('hotels.html')
+
 @app.route('/checkout')
 def checkout():
     return render_template('booking.html')
