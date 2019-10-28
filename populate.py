@@ -67,7 +67,7 @@ def populate_flights(count):
                     db.child('flights').child(data['fltno']).set(data)
 
 #db.child('flights').child('dummy').set({'yo':'yooo'})
-populate_flights(3)
+#populate_flights(3)
 
 #forgot to add fares previously "FACEPALM!!"
 
@@ -99,3 +99,6 @@ populate_flights(3)
 #     print('updating', counter)
 #     db.child('flights').child(fl.key()).update({'duration':time, 'dep':dep, 'arr':arr})
 #     counter += 1
+
+cities = ['Agra','Ahmedabad','Alappuzha','Alwar','Amritsar','Aurangabad','Bangalore','Bharatpur','Bhavnagar','Bhikaner','Bhopal','Bhubaneshwar','Bodh Gaya','Calangute','Chandigarh','Chennai','Chittaurgarh','Coimbatore','Cuttack','Dalhousie','Dehradun','Delhi','Diu-Island','Ernakulam','Faridabad','Gaya','Gangtok','Ghaziabad','Gurgaon','Guwahati','Gwalior','Haridwar','Hyderabad','Imphal','Indore','Jabalpur','Jaipur','Jaisalmer','Jalandhar','Jamshedpur','Jodhpur','Junagadh','Kanpur','Kanyakumari','Khajuraho','Khandala','Kochi','Kodaikanal','Kolkata','Kota','Kottayam','Kovalam','Lucknow','Ludhiana','Madurai','Manali','Mangalore','Margao','Mathura','Mountabu','Mumbai','Mussoorie','Mysore','Manali','Nagpur','Nainital','Noida','Ooty','Orchha','Panaji','Patna','Pondicherry','Porbandar','Portblair','Pune','Puri','Pushkar','Rajkot','Rameswaram','Ranchi','Sanchi','Secunderabad','Shimla','Surat','Thanjavur','Thiruchchirapalli','Thrissur','Tirumala','Udaipur','Vadodra','Varanasi','Vasco-Da-Gama','Vijayawada','Visakhapatnam']
+print(len(cities))
