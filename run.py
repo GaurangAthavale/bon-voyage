@@ -32,9 +32,30 @@ def show_flights():
         flights = find_flights(src, des, dep_date)
     return render_template('flights.html', flights = flights, clas = clas)
 
-@app.route('/trains-display')
+@app.route('/trains-display', methods = ["GET", "POST"])
 def show_trains():
-    return render_template('trains.html')
+    trains = []
+    if request.method == 'POST':
+        typ = request.form['type']
+        print(typ)
+        src = request.form['src']
+        print(src)
+        des = request.form['des']
+        print(des)
+        dep_date = request.form['dep_date']
+        print(dep_date)
+        ret_date = request.form['ret_date']
+        print(ret_date)
+        adults = request.form['adults']
+        print(adults)
+        kids = request.form['kids']
+        print(kids)
+        clas = request.form['class']
+        print(clas)
+        year, month, date = dep_date.split('-')
+        trains = find_trains(src, des, date, month, year, clas)
+        print(trains)
+    return render_template('trains.html', trains = trains, clas = clas)
 
 @app.route('/hotels-display')
 def show_hotels():

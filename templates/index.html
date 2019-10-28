@@ -81,7 +81,7 @@
 					<div class="input-grp">
 						<label>Class</label>
 						<select class="form-control" name="class">
-							<option value="economy">Economy Class</option>
+							<option value="economy" selected>Economy Class</option>
 							<option value="business">Business Class</option>
 							<option value="first_class">First Class</option>
 						</select>
@@ -93,50 +93,54 @@
 				</div>
 			</div>
 			<div class = "col-sm-6 search-trains">
+				<form action="/trains-display" method = "POST">
 				<div class="radio1">
-					<input type="radio" class="btn" name="check"><span>Round Trip</span>
-					<input type="radio" class="btn" name="check" checked="checked"><span>One Way Trip</span>
+					<input type="radio" class="btn" name="type" value = "round"><span>Round Trip</span>
+					<input type="radio" class="btn" name="type" value = "one" checked="checked"><span>One Way Trip</span>
 				</div>
 				<div class="booking-form">
 					<label>From</label>
 					<br>
-					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<input type="text" class="ax form-control" placeholder="City" size="458px" name="src">
 					<br>
 					<label>To</label>
 					<br>
-					<input type="text" class="ax form-control" placeholder="City" size="458px">
+					<input type="text" class="ax form-control" placeholder="City" size="458px" name="des">
 					<br>
 					<div class="input-grp">
 						<label>Departure</label>
-						<input type="date" class="form-control select-date">
+						<input type="date" class="form-control select-date" name="dep_date">
 					</div>
 					<div class="input-grp">
 						<label>Return</label>
-						<input type="date" class="form-control select-date">
+						<input type="date" class="form-control select-date" name="ret_date">
 					</div>
 					<br>
 					<div class="input-grp">
 						<label>Adults(18+)</label>
-						<input type="number" class="form-control" value="1">
+						<input type="number" class="form-control" value="1" name="adults">
 					</div>
 					<div class="input-grp">
 						<label>Children(0-17)</label>
-						<input type="number" class="form-control" value="0">
+						<input type="number" class="form-control" value="0" name="kids">
 					</div>
 					<br>
 					<div class="input-grp">
 						<label>Class</label>
-						<select class="form-control">
-							<option value="1">AC 3-Tier</option>
-							<option value="2">First Class</option>
-							<option value="3">AC Chair Car</option>
-							<option value="4">Sleeper</option>
+						<select class="form-control" name="class">
+							<option value="3A" selected>AC 3-Tier</option>
+							<option value="2A">AC 2-Tier</option>
+							<option value="1A">AC First Class</option>
+							<option value="SL">Sleeper Class</option>
+							<option value="CC">AC Chair Car</option>
+							<option value="2S">Second Seater</option>
 						</select>
 					</div>
 					<div class="input-grp">
-						<button class="form-control train" type="button">Show Trains</button>
+						<button class="form-control train" type="submit">Show Trains</button>
 					</div>
 				</div>
+				</form>
 			</div>
 			<div class = "col-sm-6 search-hotels">
 				<!-- <div class="radio1">
