@@ -1,6 +1,6 @@
     {% extends 'index.html' %}
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/flights.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/trains.css') }}">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -37,7 +37,11 @@
                         <input type="date" class="form-control select-date">
                     </div>
                     <div class="input-grp">
-                        <label>Passengers</label>
+                        <label>Adults(18+)</label>
+                        <input type="number" class="form-control" value="1">
+                    </div>
+                    <div class="input-grp">
+                        <label>Children(0-17)</label>
                         <input type="number" class="form-control" value="1">
                     </div>
                     <!-- <label>Passengers</label> -->
@@ -50,122 +54,82 @@
                     
                     <div class="input-grp">
                         <label>Class</label>
-                        <select class="form-control" name="class">
-                            <option value="economy">Economy Class</option>
-                            <option value="business">Business Class</option>
-                            <option value="first_class">First Class</option>
+                        <select class="form-control ab">
+                            <option value="1">AC 3-Tier</option>
+                            <option value="2">First Class</option>
+                            <option value="3">AC Chair Car</option>
+                            <option value="4">Sleeper</option>
                         </select>
                     </div>
                     <div class="input-grp">
-                        <button class="form-control flight" type="button">Show Flights</button>
+                        <button class="form-control flight" type="button">Show Trains</button>
                     </div>
                 </div>
                 <hr>
      <div class="row">           
-    <div class="col-sm-2 a">
+    <div class="col-sm-2">
         <h2>Filters</h2>
-        <hr>
-        <h3>Price based</h3>
-        <br>
-        <div align="center" class="row v booking-form">
-            <div align="center" class="input-grp">
-            <label>Min. Price</label>
-            <br>
-            <input class="form-control" type="text" name="minprice">
-            </div>
-            <div class="input-grp">
-            <label>Max. Price</label>
-            <br>
-            <input class="form-control" type="text" name="maxprice">
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="hr1"></div>
-        <br>
-        <h3>Duration based</h3>
-        <br>
-        <div align="center" class="row v booking-form">
-            <div align="center" class="input-grp">
-            <label>Min. Duration</label>
-            <br>
-            <input class="form-control" type="text" name="minprice">
-            </div>
-            <div class="input-grp">
-            <label>Max. Duration</label>
-            <br>
-            <input class="form-control" type="text" name="maxprice">
-            </div>
-        </div>
     </div>
-    <!-- <div class="vl"></div> -->
-    <div class="col-sm-9 trip" id="one">
-        {% for fl in flights %}
+    <div class="vl"></div>
+    <div class="col-sm-9" id="one">
         <div class="container-fluid">
             <div class="row align-items-center a">
-                    <div class="col-2">
-                        {% set flt = ''+fl['airline']+'.png' %}
-                        <img src="{{ url_for('static', filename='images/airline/flt') }}" width="100" height="100"><br>{{ fl['airline'] }} <br> {{ fl['fltno'] }}
-                        <!-- Jet Airways <br> 9W 512 -->
+                    <div class="col-3">
+                        HOWRAH MAIL <br> 12840
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
                             <div class="row align-items-center justify-content-center inner-card a">
                                 <div class="col-3">
-                                    {{ fl['src'] }} <br>{{ fl['dep'] }}
-                                    <!-- DEL <br>18:10 -->
+                                    MAS <br>23:45
                                 </div>
                                 <div class="col-5">
-                                    {{ fl['duration'] }} hr <hr>
-                                    <!-- 01:55 hr <hr> -->
+                                    28:15 hr <hr>
                                 </div>
                                 <div class="col-3">
-                                    {{ fl['des'] }} <br>{{ fl['arr'] }}
-                                    <!-- BOM <br>20:05 -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3 align-self-center">
-                        <!-- &#8377;2012 -->
-                        &#8377;{{ fl['fare'][clas] }}
-                    </div> 
-                    <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary">Book now</button>
-                    </div>
-
-                </div>
-        </div>
-        {% endfor %}
-    </div>
-   <!--  <div class="col-sm-9 trip" id="round">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="container-fluid">
-            <div class="row align-items-center a">
-                    <div class="col-2">
-                        Jet Airways <br> 9W 512
-                    </div>
-                    <div class="col-5">
-                        <div class="container-fluid">
-                            <div class="row align-items-center justify-content-center inner-card a">
-                                <div class="col-3">
-                                    DEL <br>18:10
-                                </div>
-                                <div class="col-5">
-                                    01:55 hr <hr>
-                                </div>
-                                <div class="col-3">
-                                    BOM <br>20:05
+                                    HWH <br>04:00
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-2 align-self-center">
-                        &#8377;2012
+                        &#8377;1670
+                    </div>
+                    <div class="col-2 align-self-center but">
+                        <button class="btn btn-primary">Book now</button>
+                    </div>
+
+                </div>
+        </div>  
+    </div>
+     <!-- <div class="col-sm-9" id="round">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="container-fluid">
+            <div class="row align-items-center a">
+                    <div class="col-2">
+                        HOWRAH MAIL <br> 12840
+                    </div>
+                    <div class="col-5">
+                        <div class="container-fluid">
+                            <div class="row align-items-center justify-content-center inner-card a">
+                                <div class="col-3">
+                                    MAS <br>23:45
+                                </div>
+                                <div class="col-5">
+                                    28:15 hr <hr>
+                                </div>
+                                <div class="col-3">
+                                    HWH <br>04:00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        &#8377;1670
                     </div>
                     <div class="col-3 align-self-center">
-                        <button class="btn btn-primary">Book now</button>
+                        <button class="btn btn-primary but">Book now</button>
                     </div>
             </div>
         </div>
@@ -174,25 +138,25 @@
                 <div class="container-fluid">
             <div class="row align-items-center a">
                     <div class="col-2">
-                        Jet Airways <br> 9W 313
+                        HOWRAH MAIL <br> 12841
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
                             <div class="row align-items-center justify-content-center inner-card a">
                                 <div class="col-3">
-                                    BOM <br>18:10
+                                    HWH <br>23:45
                                 </div>
                                 <div class="col-5">
-                                    01:55 hr <hr>
+                                    28:15 hr <hr>
                                 </div>
                                 <div class="col-3">
-                                    DEL <br>20:05
+                                    MAS <br>04:00
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-2 align-self-center">
-                        &#8377;2012
+                        &#8377;1670
                     </div>
                     <div class="col-3 align-self-center">
                         <button class="btn btn-primary">Book now</button>
@@ -202,5 +166,5 @@
         </div>
     </div>
     </div>
-</div> -->
+</div>  -->
 {% endblock %}

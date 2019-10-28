@@ -4,8 +4,25 @@
     border-radius: 10px;
     width: 100%; 
     margin: 2%;
-    padding: 1%;
+    padding: 0%;
     font-size: 1.25em;
+    height: 250px;
+}
+
+.b{
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    width: 100%; 
+    margin: 2%;
+    padding: 0%;
+    font-size: 1em;
+    height: 200px;
+}
+
+.but button{
+    font-size: 1em;
+    color: #000;
 }
 
 .inner-card .col-3, .col-5{
@@ -16,14 +33,6 @@ hr{
     border: 2px dashed black;
 }
 
-.hr1{
-    border: 1px dashed black;
-}
-
-.v input{
-    width: 100%;
-}
-
 .vl{
   border-right: 1px solid black;
   height: 500px;
@@ -31,15 +40,6 @@ hr{
 /*.btn{
     font-size: 1.5vw;
 }*/
-
-.input-grp button{
-    color: #000;
-}
-
-.but button{
-    font-size: 1em;
-    color: #000;
-}
 
 
 .radio1{
@@ -85,6 +85,7 @@ hr{
     font-size: 18px;
     color: #000;
 }
+
 /*
 .input-grp{
     width: 20%;
@@ -101,9 +102,7 @@ hr{
 }
 
 .input-grp button{
-    width:100%;
-    font-size: 18px;
-    border-color: #000;
+    color: #000;
 }
 
 .ab{
@@ -111,5 +110,5 @@ hr{
 }
 
 .flight{
-    background: rgb(27, 74, 247);
+    background: #4CAF50;
 }

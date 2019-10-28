@@ -1,0 +1,92 @@
+    {% extends 'index.html' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/hotels.css') }}">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+{% endblock %}
+{% block data %}
+                <div class="booking-form">
+                    <div class="input-grp">
+                        <label>Hotel</label>
+                        <input type="text" class="form-control" placeholder="City">
+                    </div>
+                    <div class="input-grp">
+                        <label>Area</label>
+                        <input type="text" class="form-control" placeholder="City">
+                    </div>
+                    <!-- <label>From</label> -->
+                    <!-- <br> -->
+                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px">
+                    
+                    <label>To</label> -->
+                    <!-- <br> -->
+                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px"> -->
+                    
+                    <div class="input-grp">
+                        <label>Check In</label>
+                        <input type="date" class="form-control select-date">
+                    </div>
+                    <div class="input-grp">
+                        <label>Check Out</label>
+                        <input type="date" class="form-control select-date">
+                    </div>
+                    <div class="input-grp">
+                        <label>Guests</label>
+                        <input type="number" class="form-control" value="1">
+                    </div>
+                    <div class="input-grp">
+                        <label>Rooms</label>
+                        <input type="number" class="form-control" value="1">
+                    </div>
+                    <!-- <label>Passengers</label> -->
+                    <!-- <br> -->
+                    <!-- <input type="number" class="ax form-control" value="1"> -->
+                    <!-- <div class="input-grp">
+                        <label>Children(0-17)</label>
+                        <input type="number" class="form-control" value="0">
+                    </div> -->
+                    
+                    <div class="input-grp">
+                        <label>Class</label>
+                        <select class="form-control">
+                            <option value="1">AC Room</option>
+                            <option value="2">Non-AC Room</option>
+                            <option value="3">Deluxe Room</option>
+                        </select>
+                    </div>
+                    <div class="input-grp">
+                        <button class="form-control" type="button">Show Hotels</button>
+                    </div>
+                </div>
+                <hr>
+     <div class="row">           
+    <div class="col-sm-2">
+        <h2>Filters</h2>
+    </div>
+    <div class="vl"></div>
+    <div class="col-sm-9" id="one">
+        <div class="container-fluid">
+            <div class="row align-items-center a">
+                    <div class="col-4">
+                        <img src="{{ url_for('static', filename='images/vv.jpg') }}" height="200" width="350">
+                    </div>
+                    <div class="col-4">
+                        <div class="container-fluid">
+                            <div class="row align-items-center   justify-content-center inner-card b">
+                                    <font color="blue">Mango Hotels Valley View</font><br>Mahabaleshwar <br><br>Room Service    Gym/Spa
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        &#8377;3045<br>per room/per night
+                    </div>
+                    <div class="col-2 align-self-center but">
+                        <button class="btn btn-primary">Book now</button>
+                    </div>
+
+                </div>
+        </div>  
+    </div>
+{% endblock %}
