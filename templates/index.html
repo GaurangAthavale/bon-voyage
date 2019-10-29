@@ -143,49 +143,43 @@
 				</form>
 			</div>
 			<div class = "col-sm-6 search-hotels">
-				<!-- <div class="radio1">
-					<input type="radio" class="btn" name="check"><span>Round Trip</span>
-					<input type="radio" class="btn" name="check"><span>One Way Trip</span>
-				</div> -->
-				<div class="booking-form">
-					<label>Hotel</label>
-					<br>
-					<input type="text" class="ax form-control" placeholder="Hotel" size="458px" required>
-					<br>
-					<label>Area</label>
-					<br>
-					<input type="text" class="ax form-control" placeholder="Area" size="458px" required>
-					<br>
-					<div class="input-grp">
-						<label>Check In</label>
-						<input type="date" class="form-control select-date" required>
+				<form action="/hotels-display" method="POST">
+					<div class="booking-form">
+						<label>City</label>
+						<br>
+						<input type="text" class="ax form-control" placeholder="City" size="458px" name="city" required>
+						<br>
+						<div class="input-grp">
+							<label>Check In</label>
+							<input type="date" class="form-control select-date" name="checkin" required>
+						</div>
+						<div class="input-grp">
+							<label>Check Out</label>
+							<input type="date" class="form-control select-date" name="checkout" required>
+						</div>
+						<br>
+						<div class="input-grp">
+							<label>Adults(18+)</label>
+							<input type="number" class="form-control" name="room1" value="1">
+						</div>
+						<div class="input-grp">
+							<label>Children(0-17)</label>
+							<input type="number" class="form-control" name="room2" value="0">
+						</div>
+						<br>
+						<!-- <div class="input-grp">
+							<label>Class</label>
+							<select class="form-control" name=>
+								<option value="1">AC Room</option>
+								<option value="2">Non-AC Room</option>
+								<option value="3">Deluxe Room</option>
+							</select>
+						</div> -->
+						<div class="input-grp">
+							<button class="form-control hotel" type="submit">Show Hotels</button>
+						</div>
 					</div>
-					<div class="input-grp">
-						<label>Check Out</label>
-						<input type="date" class="form-control select-date" required>
-					</div>
-					<br>
-					<div class="input-grp">
-						<label>Adults(18+)</label>
-						<input type="number" class="form-control" value="1">
-					</div>
-					<div class="input-grp">
-						<label>Children(0-17)</label>
-						<input type="number" class="form-control" value="0">
-					</div>
-					<br>
-					<div class="input-grp">
-						<label>Class</label>
-						<select class="form-control">
-							<option value="1">AC Room</option>
-							<option value="2">Non-AC Room</option>
-							<option value="3">Deluxe Room</option>
-						</select>
-					</div>
-					<div class="input-grp">
-						<button class="form-control hotel" type="button">Show Hotels</button>
-					</div>
-				</div>
+				</form>
 			</div>
 			<div class="col-sm-6 why-choose-us" id="mydiv">
 				<h2>Simply the Best</h2>

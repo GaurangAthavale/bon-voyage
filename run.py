@@ -1,5 +1,6 @@
 from db_connections import find_flights
 from trains_scrape import find_trains
+from hotels_scrape import find_hotels
 from conversions import find_flt_duration
 from flask import Flask, render_template, request
 
@@ -57,9 +58,25 @@ def show_trains():
         print(trains)
     return render_template('trains.html', trains = trains, clas = clas)
 
-@app.route('/hotels-display')
+@app.route('/hotels-display', methods = ['GET', 'POST'])
 def show_hotels():
-    return render_template('hotels.html')
+    hotels = []
+    if request.method == 'POST':
+        city = request.form['city']
+        print(city)
+        checkin = request.form['checkin']
+        print(checkin)
+        checkout = request.form['checkout']
+        print(checkout)
+        room1 = request.form['room1']
+        print(room1)
+        room2 = request.form['room2']
+        print(room2)
+        hotels = find_hotels(city, checkin, checkout, '2', [room1, room2])
+        print(len(hotels))
+        # for hotel in hotels:
+        #     print(hotel['name'],hotel['priceRange'],sep=':')
+    return render_template('hotels.html', hotels=hotels)
 
 @app.route('/checkout')
 def checkout():
