@@ -14,11 +14,11 @@
                 <div class="booking-form">
                     <div class="input-grp">
                         <label>From</label>
-                        <input type="text" class="form-control" placeholder="City">
+                        <input type="text" class="form-control" placeholder="City" required>
                     </div>
                     <div class="input-grp">
                         <label>To</label>
-                        <input type="text" class="form-control" placeholder="City">
+                        <input type="text" class="form-control" placeholder="City" required>
                     </div>
                     <!-- <label>From</label> -->
                     <!-- <br> -->
@@ -30,7 +30,7 @@
                     
                     <div class="input-grp">
                         <label>Departure</label>
-                        <input type="date" class="form-control select-date">
+                        <input type="date" class="form-control select-date" required>
                     </div>
                     <div class="input-grp">
                         <label>Return</label>
@@ -62,7 +62,7 @@
                 </div>
                 <hr>
      <div class="row">           
-    <div class="col-sm-2 a">
+    <div class="col-sm-2 a" style="height: 50%">
         <h2>Filters</h2>
         <hr>
         <h3>Price based</h3>
@@ -102,17 +102,17 @@
     <div class="col-sm-9 trip" id="one">
         {% for fl in flights %}
         <div class="container-fluid">
-            <div class="row align-items-center a">
+            <div class="row align-items-center a" style="background: #9cf7d6">
                     <div class="col-2">
                         {% set flt = ''+fl['airline']+'.png' %}
-                        <img src="{{ url_for('static', filename='images/airline/flt') }}" width="100" height="100"><br>{{ fl['airline'] }} <br> {{ fl['fltno'] }}
+                        <img src="{{ url_for('static', filename='images/airline/'+flt) }}" width="100" height="100"><br><font style="color: blue">{{ fl['airline'] }}</font> <br> {{ fl['fltno'] }}
                         <!-- Jet Airways <br> 9W 512 -->
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
-                            <div class="row align-items-center justify-content-center inner-card a">
+                            <div class="row align-items-center justify-content-center inner-card a" style="background: #ffabd1">
                                 <div class="col-3">
-                                    {{ fl['src'] }} <br>{{ fl['dep'] }}
+                                    <font style="color: red">{{ fl['src'] }}</font> <br><font style="color: green">{{ fl['dep'] }}</font>
                                     <!-- DEL <br>18:10 -->
                                 </div>
                                 <div class="col-5">
@@ -120,7 +120,7 @@
                                     <!-- 01:55 hr <hr> -->
                                 </div>
                                 <div class="col-3">
-                                    {{ fl['des'] }} <br>{{ fl['arr'] }}
+                                    <font style="color: red">{{ fl['des'] }}</font> <br><font style="color: green">{{ fl['arr'] }}</font>
                                     <!-- BOM <br>20:05 -->
                                 </div>
                             </div>
@@ -131,13 +131,14 @@
                         &#8377;{{ fl['fare'][clas] }}
                     </div> 
                     <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary">Book now</button>
+                        <button class="btn btn-primary" style="background: orange">Book now</button>
                     </div>
 
                 </div>
         </div>
         {% endfor %}
     </div>
+</div>
    <!--  <div class="col-sm-9 trip" id="round">
         <div class="row">
             <div class="col-sm-6">

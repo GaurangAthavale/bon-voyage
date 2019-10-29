@@ -4,6 +4,7 @@
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 {% endblock %}
 {% block data %}
@@ -14,11 +15,11 @@
                 <div class="booking-form">
                     <div class="input-grp">
                         <label>From</label>
-                        <input type="text" class="form-control" placeholder="City">
+                        <input type="text" class="form-control" placeholder="City" name="from" id="from" required>
                     </div>
                     <div class="input-grp">
                         <label>To</label>
-                        <input type="text" class="form-control" placeholder="City">
+                        <input type="text" class="form-control" placeholder="City" name="to" id="to" required>
                     </div>
                     <!-- <label>From</label> -->
                     <!-- <br> -->
@@ -30,7 +31,7 @@
                     
                     <div class="input-grp">
                         <label>Departure</label>
-                        <input type="date" class="form-control select-date">
+                        <input type="date" class="form-control select-date" required>
                     </div>
                     <div class="input-grp">
                         <label>Return</label>
@@ -67,28 +68,61 @@
                 </div>
                 <hr>
      <div class="row">           
-    <div class="col-sm-2">
+    <div class="col-sm-2 a" style="height: 50%">
         <h2>Filters</h2>
+        <hr>
+        <h3>Price based</h3>
+        <br>
+        <div align="center" class="row v booking-form">
+            <div align="center" class="input-grp">
+            <label>Min. Price</label>
+            <br>
+            <input class="form-control" type="text" name="minprice">
+            </div>
+            <div class="input-grp">
+            <label>Max. Price</label>
+            <br>
+            <input class="form-control" type="text" name="maxprice">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="hr1"></div>
+        <br>
+        <h3>Duration based</h3>
+        <br>
+        <div align="center" class="row v booking-form">
+            <div align="center" class="input-grp">
+            <label>Min. Duration</label>
+            <br>
+            <input class="form-control" type="text" name="minprice">
+            </div>
+            <div class="input-grp">
+            <label>Max. Duration</label>
+            <br>
+            <input class="form-control" type="text" name="maxprice">
+            </div>
+        </div>
     </div>
-    <div class="vl"></div>
+    <!-- <div class="vl"></div> -->
     <div class="col-sm-9" id="one">
         {% for train in trains %}
         <div class="container-fluid">
-            <div class="row align-items-center a">
+            <div class="row align-items-center a" style="background: #9cf7d6">
                     <div class="col-3">
-                        {{ train['trn_name'] }} <br> {{ train['trn_no'] }}
+                        <i class="fa fa-train" aria-hidden="true"></i> <font style="color: blue">{{ train['trn_name'] }}</font> <br> {{ train['trn_no'] }}
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
-                            <div class="row align-items-center justify-content-center inner-card a">
+                            <div class="row align-items-center justify-content-center inner-card a" style="background: #ffabd1">
                                 <div class="col-3">
-                                    {{ train['source'] }} <br>{{ train['departure time'] }}
+                                    <font style="color: red">{{ train['source'] }}</font> <br><font style="color: green">{{ train['departure time'] }}</font>
                                 </div>
                                 <div class="col-5">
                                     {{ train['duration'] }} <hr>
                                 </div>
                                 <div class="col-3">
-                                    {{ train['destination'] }} <br>{{ train['arrival time'] }}
+                                    <font style="color: red">{{ train['destination'] }}</font> <br><font style="color: green">{{ train['arrival time'] }}</font>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +131,7 @@
                         {{ train['fares'][clas] }}
                     </div>
                     <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary">Book now</button>
+                        <button class="btn btn-primary" style="background: orange">Book now</button>
                     </div>
 
                 </div>
@@ -170,3 +204,21 @@
     </div>
 </div>  -->
 {% endblock %}
+<script>
+$(document).ready(function(){
+    $('#from').keyup(function(){
+        $('#result').html('');
+        var searchfield = $('#from').val();
+        var exp = new RegExp(searchfield, "i");
+        $.getJSON("{{ url_for('static', filename='trains.json') }}",function(trains){
+            $.each(trains, function(key, value){
+                if(value.name.search(exp)!=-1 || value.code.search(exp)!=-1)
+                {
+                    $('#result').append('<li class="list-group-item">'+value.name+','+value.code+'</li>');
+                }
+
+            });
+        });
+    });
+});
+</script>

@@ -21,7 +21,11 @@ hr{
 }
 
 .v input{
-    width: 100%;
+    width: 125%;
+}
+
+.v label{
+    margin-left: 27.5%;
 }
 
 .vl{

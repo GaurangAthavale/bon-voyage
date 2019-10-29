@@ -1,0 +1,14 @@
+[
+	{
+		"name" : "New Delhi",
+		"code" : "NDLS"
+	},
+	{
+		"name" : "Mumbai Central",
+		"code" : "BCT"
+	},
+	{
+		"name" : "Chhatrapati Shivaji Maharaj Terminus",
+		"code" : "CSMT"
+	}
+]
