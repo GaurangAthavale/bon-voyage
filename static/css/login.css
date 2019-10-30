@@ -1,0 +1,41 @@
+body{
+    background: #E1E7EE;
+}
+
+.booking {
+    max-width: 450px;
+    border: 1px solid black;
+    margin: 10% auto 0;
+    font-size: 30px;
+}
+
+hr{
+    border: 1px solid black;
+}
+
+.vl{
+  border-right: 1px solid black;
+}
+
+.booking-form{
+    padding: 0 20px 20px;
+}
+
+.booking-form label{
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #000;
+    border-color: black;
+}
+
+.form-control{
+    font-size: 20px;
+    border-radius: 10;
+    background: transparent;
+}
+
+button{
+    width: 100%;
+    font-size: 1em;
+}

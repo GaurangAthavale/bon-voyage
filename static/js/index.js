@@ -31,3 +31,29 @@ $(document).ready(function(){
             $(".search-hotels").show();
           });
         });
+
+$(document).ready(function(){
+    $(".q").hide();
+    $(".w").show();
+    $("#o").click(function(){
+        $(".q").hide();
+        $(".w").show();
+      });
+    $("#r").click(function(){
+        $(".w").hide();
+        $(".q").show();
+      });
+    });
+
+$(document).ready(function(){
+    $(".q1").hide();
+    $(".w1").show();
+    $("#on").click(function(){
+        $(".q1").hide();
+        $(".w1").show();
+      });
+    $("#ro").click(function(){
+        $(".w1").hide();
+        $(".q1").show();
+      });
+    });

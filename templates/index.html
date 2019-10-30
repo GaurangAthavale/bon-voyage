@@ -30,11 +30,11 @@
 		    <span class="navbar-text">
 				<ul class="navbar-nav mr-auto">
 			      	<li class="nav-item">
-			        	<a class="nav-link" href="/trains">Login</a>
+			        	<a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
 			      	</li>
-			      	<li class="nav-item">
-			        	<a class="nav-link" href="/hotels">Sign Up</a>
-			      	</li>
+			      	<!-- <li class="nav-item">
+			        	<a class="nav-link" href="/signup">Sign Up</a>
+			      	</li> -->
 			    </ul>
 		    </span>
 		  </div>
@@ -45,8 +45,8 @@
 			<div class = "col-sm-6 search-flights">
 				<form action="/flights-display" method = "POST">
 				<div class="radio1">
-					<input type="radio" class="btn" name="type" value = "round"><span>Round Trip</span>
-					<input type="radio" class="btn" name="type" value = "one" checked="checked"><span>One Way Trip</span>
+					<input type="radio" class="btn" name="type" value = "round" id="r"><span>Round Trip</span>
+					<input type="radio" class="btn" name="type" value = "one" id="o" checked="checked"><span>One Way Trip</span>
 				</div>
 				<div class="booking-form">
 					<label>From</label>
@@ -57,15 +57,23 @@
 					<br>
 					<input type="text" class="ax form-control" placeholder="City" size="458px" name="des" required>
 					<br>
-					<div class="input-grp">
+					<!-- <div class="q"> -->
+					<div class="input-grp" >
 						<label>Departure</label>
-						<input type="date" class="form-control select-date" name="dep_date" required>
+						<input type="date" class="form-control select-date" name="dep_date">
 					</div>
-					<div class="input-grp">
+					<div class="input-grp q">
 						<label>Return</label>
 						<input type="date" class="form-control select-date" name="ret_date">
 					</div>
 					<br>
+					<!-- </div> -->
+					<!-- <div class="w">
+						<label>Departure</label>
+						<br>
+						<input type="date" class="ax form-control" size="458px" name="dep_date"> -->
+						<!-- <input type="date" class="form-control select-date" name="dep_date" required> -->
+					<!-- </div> -->
 					<!-- <label>Passengers</label>
 					<br>
 					<input type="number" class="ax form-control" value="1"> -->
@@ -95,8 +103,8 @@
 			<div class = "col-sm-6 search-trains">
 				<form action="/trains-display" method = "POST">
 				<div class="radio1">
-					<input type="radio" class="btn" name="type" value = "round"><span>Round Trip</span>
-					<input type="radio" class="btn" name="type" value = "one" checked="checked"><span>One Way Trip</span>
+					<input type="radio" class="btn" name="type" value = "round" id="ro"><span>Round Trip</span>
+					<input type="radio" class="btn" name="type" value = "one" id="on" checked="checked"><span>One Way Trip</span>
 				</div>
 				<div class="booking-form">
 					<label>From</label>
@@ -107,6 +115,15 @@
 					<br>
 					<input type="text" class="ax form-control" placeholder="City" size="458px" name="des" required>
 					<br>
+					<!-- <div class="input-grp">
+						<label>Departure</label>
+						<input type="date" class="form-control select-date" name="dep_date" required>
+					</div>
+					<div class="input-grp">
+						<label>Return</label>
+						<input type="date" class="form-control select-date" name="ret_date">
+					</div> -->
+					<div class="q1">
 					<div class="input-grp">
 						<label>Departure</label>
 						<input type="date" class="form-control select-date" name="dep_date" required>
@@ -115,7 +132,13 @@
 						<label>Return</label>
 						<input type="date" class="form-control select-date" name="ret_date">
 					</div>
-					<br>
+					</div>
+					<div class="w1">
+						<label>Departure</label>
+						<br>
+						<input type="date" class="ax form-control" size="458px" name="dep_date" required>
+						<!-- <input type="date" class="form-control select-date" name="dep_date" required> -->
+					</div>
 					<div class="input-grp">
 						<label>Adults(18+)</label>
 						<input type="number" class="form-control" value="1" name="adults">
@@ -175,6 +198,7 @@
 								<option value="3">Deluxe Room</option>
 							</select>
 						</div> -->
+						<br>
 						<div class="input-grp">
 							<button class="form-control hotel" type="submit">Show Hotels</button>
 						</div>

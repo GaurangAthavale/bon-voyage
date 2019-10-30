@@ -78,6 +78,14 @@ def show_hotels():
         #     print(hotel['name'],hotel['priceRange'],sep=':')
     return render_template('hotels.html', hotels=hotels)
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/checkout')
 def checkout():
     return render_template('booking.html')

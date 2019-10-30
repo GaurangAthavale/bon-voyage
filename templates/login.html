@@ -1,0 +1,47 @@
+	{% extends 'index.html' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
+{% block data %}
+<div class="booking">
+        <!-- <div class="radio1">
+            <input type="radio" class="btn" name="check" checked="checked"><span>Sign In</span>
+            <input type="radio" class="btn" name="check"><span>Sign Up</span>
+        </div> -->
+        <div class="row">
+            <div class="col-sm-6">
+                <span id = "login1">Log In</span>
+            </div>
+            <!-- <div class="vl"></div> -->
+            <div class="col-sm-6">
+                <span id = "signup1">Sign Up</span>
+            </div>
+        </div>
+        <hr>
+        <div class="booking-form login">
+            <label>E-mail</label>
+            <input type="text" class="form-control" placeholder="Username">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password">
+            <br>
+            <button class="btn btn-primary" type="button">Log In</button>
+        </div>
+        <div class="booking-form signup">
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Name">
+            <label>E-mail</label>
+            <input type="text" class="form-control" placeholder="E-mail">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password">
+            <label>City</label>
+            <input type="text" class="form-control" placeholder="City">
+            <br>
+            <button class="btn btn-primary" type="button">Sign Up</button>
+        </div>
+    </div>
+{% endblock %}

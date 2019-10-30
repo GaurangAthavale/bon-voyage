@@ -7,9 +7,9 @@
 
 {% endblock %}
 {% block data %}
-    <div class="radio1">
-                    <input type="radio" class="btn" name="check" value="round" checked>Round Trip
-                    <input type="radio" class="btn" name="check" value="one">One Way Trip
+    <!-- <div class="radio1">
+                    <input type="radio" class="btn" name="check" value="round" id="r">Round Trip
+                    <input type="radio" class="btn" name="check" value="one" id="o" checked>One Way Trip
                 </div>
                 <div class="booking-form">
                     <div class="input-grp">
@@ -20,13 +20,6 @@
                         <label>To</label>
                         <input type="text" class="form-control" placeholder="City" required>
                     </div>
-                    <!-- <label>From</label> -->
-                    <!-- <br> -->
-                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px">
-                    
-                    <label>To</label> -->
-                    <!-- <br> -->
-                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px"> -->
                     
                     <div class="input-grp">
                         <label>Departure</label>
@@ -40,14 +33,6 @@
                         <label>Passengers</label>
                         <input type="number" class="form-control" value="1">
                     </div>
-                    <!-- <label>Passengers</label> -->
-                    <!-- <br> -->
-                    <!-- <input type="number" class="ax form-control" value="1"> -->
-                    <!-- <div class="input-grp">
-                        <label>Children(0-17)</label>
-                        <input type="number" class="form-control" value="0">
-                    </div> -->
-                    
                     <div class="input-grp">
                         <label>Class</label>
                         <select class="form-control" name="class">
@@ -57,12 +42,12 @@
                         </select>
                     </div>
                     <div class="input-grp">
-                        <button class="form-control flight" type="button">Show Flights</button>
+                        <button class="form-control flight" style="background: #9cf7d6" type="button">Show Flights</button>
                     </div>
-                </div>
-                <hr>
-     <div class="row">           
-    <div class="col-sm-2 a" style="height: 50%">
+                </div> -->
+                <!-- <hr> -->
+     <!-- <div class="row">            -->
+    <!-- <div class="a" style="height: 10%">
         <h2>Filters</h2>
         <hr>
         <h3>Price based</h3>
@@ -97,20 +82,32 @@
             <input class="form-control" type="text" name="maxprice">
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- <div class="vl"></div> -->
-    <div class="col-sm-9 trip" id="one">
+    <div class="col-sm-9 trip one" style="margin-left: 11.5%">
+        {% set days = ["M","T","W","T","F","S","S"] %}
         {% for fl in flights %}
         <div class="container-fluid">
-            <div class="row align-items-center a" style="background: #9cf7d6">
+            <div class="row align-items-center a">
                     <div class="col-2">
                         {% set flt = ''+fl['airline']+'.png' %}
-                        <img src="{{ url_for('static', filename='images/airline/'+flt) }}" width="100" height="100"><br><font style="color: blue">{{ fl['airline'] }}</font> <br> {{ fl['fltno'] }}
+                        <img src="{{ url_for('static', filename='images/airline/'+flt) }}" width="100" height="100"><br><font style="color: blue">{{ fl['airline'] }}</font> <br> {{ fl['fltno'] }}<br>
+                        <!-- {% for d in fl['dep_days'] %}
+                        <b>{{ days[d] }}</b>
+                        {% endfor %} -->
+                        {% for i in range(7) %}
+                        {% if i in fl['dep_days'] %}
+                        <b>{{ days[i] }}</b>
+                        {% else %}
+                        {{ days[i] }}
+                        {% endif %}
+                        {% endfor %}
+
                         <!-- Jet Airways <br> 9W 512 -->
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
-                            <div class="row align-items-center justify-content-center inner-card a" style="background: #ffabd1">
+                            <div class="row align-items-center justify-content-center inner-card a">
                                 <div class="col-3">
                                     <font style="color: red">{{ fl['src'] }}</font> <br><font style="color: green">{{ fl['dep'] }}</font>
                                     <!-- DEL <br>18:10 -->
@@ -131,15 +128,15 @@
                         &#8377;{{ fl['fare'][clas] }}
                     </div> 
                     <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary" style="background: orange">Book now</button>
+                        <button class="btn btn-primary" style="background: orange">Book Now</button>
                     </div>
 
                 </div>
         </div>
         {% endfor %}
     </div>
-</div>
-   <!--  <div class="col-sm-9 trip" id="round">
+
+    <!-- <div class="col-sm-9 trip round">
         <div class="row">
             <div class="col-sm-6">
                 <div class="container-fluid">
@@ -204,4 +201,5 @@
     </div>
     </div>
 </div> -->
+<!-- </div> -->
 {% endblock %}

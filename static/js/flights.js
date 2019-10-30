@@ -1,12 +1,25 @@
-$(document).ready(function() {
-    $(".trip").hide();
-    $("input[name$='check']").click(function() {
-        var test = $(this).val();
-        $(".trip").hide();
-        $("#" + test).show();
-    });
-});
+// $(document).ready(function() {
+//     $(".trip").hide();
+//     $("input[name$='check']").click(function() {
+//         var test = $(this).val();
+//         $(".trip").hide();
+//         $("#" + test).show();
+//     });
+// });
 
+
+$(document).ready(function(){
+    $(".round").hide();
+    $(".one").show();
+    $("#o").click(function(){
+        $(".round").hide();
+        $(".one").show();
+      });
+    $("#r").click(function(){
+        $(".one").hide();
+        $(".round").show();
+      });
+    });
 
 // $(function() {
 //     $("[name=check]").click(function(){
