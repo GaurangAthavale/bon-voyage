@@ -3,6 +3,7 @@ from trains_scrape import find_trains
 from hotels_scrape import find_hotels
 from conversions import find_flt_duration
 from flask import Flask, render_template, request
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -74,6 +75,8 @@ def show_hotels():
         print(room2)
         hotels = find_hotels(city, checkin, checkout, '2', [room1, room2])
         print(len(hotels))
+        pprint(hotels[0])
+        pprint(hotels[1])
         # for hotel in hotels:
         #     print(hotel['name'],hotel['priceRange'],sep=':')
     return render_template('hotels.html', hotels=hotels)
