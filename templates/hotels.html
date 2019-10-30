@@ -67,6 +67,7 @@
     </div>
     <div class="vl"></div>
     <div class="col-sm-9" id="one">
+        {% for ht in hotels %}
         <div class="container-fluid">
             <div class="row align-items-center a">
                     <div class="col-4">
@@ -75,18 +76,30 @@
                     <div class="col-4">
                         <div class="container-fluid">
                             <div class="row align-items-center   justify-content-center inner-card b">
-                                    <font color="blue">Mango Hotels Valley View</font><br>Mahabaleshwar <br><br>Room Service    Gym/Spa
+                                    <font color="blue">{{ ht['name'] }}</font><br>{{ ht['address'] }}<br><br>
+                                    {% for a in ht['amenities'] %}
+                                    {{ a }}
+                                    {% endfor %}
                             </div>
                         </div>
                     </div>
                     <div class="col-2 align-self-center">
-                        &#8377;3045<br>per room/per night
+                        {{ ht['price'] }} {% if 'old' in ht %}{{ ht['old'] }}{% endif %}<br>
                     </div>
+                    <!-- rating -->
+                    {{ ht['ratingValue'] }}
+                    {% if 'description' in ht %}{{ ht['description'] }}{% endif %}
+                    <ul>
+                    {% for pol in ht['policies'] %}
+                    <li>{{ pol }}</li>
+                    {% endfor %}
+                    </ul>
                     <div class="col-2 align-self-center but">
                         <button class="btn btn-primary">Book now</button>
                     </div>
 
                 </div>
-        </div>  
+        </div> 
+        {% endfor %}
     </div>
 {% endblock %}

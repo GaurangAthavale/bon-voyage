@@ -46,6 +46,38 @@ def find_hotels(city, checkin, checkout, rooms, guests):
                 # print(nametag)
                 address = row.find('span',{'class':'u-line--clamp-2'})
                 info['address'] = address.text
+                am_list = row.find_all('div',{'class':'amenityWrapper__amenity'})
+                amenities = []
+                for amenity in am_list:
+                    amenities.append(amenity.find('span').text.strip())
+                info['amenities'] = amenities[:-1]
+                if 'ratingValue' not in info:
+                    info['ratingValue'] = 'NEW'
+                discounted,og = info['priceRange'].split('-')
+                #print(discounted, og)
+                discounted = discounted.strip()
+                og = og.strip()
+                # print(discounted[1:], og[1:])
+                if int(discounted[1:]) < int(og[1:]):
+                    info['price'] = discounted
+                    info['old'] = og
+                else:
+                    info['price'] = og
+                # print(info['price'])
+                dtr = requests.get(info['url'])
+                dtsoup = BeautifulSoup(dtr.text, 'html.parser')
+                desctag = dtsoup.find('div',{'class':'c-u43rea'})
+                if desctag:
+                    loc = desctag.text.find('Special Features')
+                    info['description'] = desctag.text[8:loc].strip()
+                    # print(info['description'])
+                policies_ul = dtsoup.find('ul',{'class':'c-f0mxva'})
+                policies_li = policies_ul.find_all('li')
+                policies = []
+                for p in policies_li[1:]:
+                    policies.append(p.text)
+                info['policies'] = policies
+                print(info['policies'])
                 hotel_list.append(info)
         if hotels > 0 and pgno < 4:
             pgno += 1
@@ -53,4 +85,4 @@ def find_hotels(city, checkin, checkout, rooms, guests):
             break
     return hotel_list
 
-# find_hotels('kolkata','07-12-2019','10-12-2019','2',['1','2'])
+# find_hotels('chittorgarh','07-12-2019','10-12-2019','2',['1','2'])
