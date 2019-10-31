@@ -93,6 +93,10 @@ def signup():
 def checkout():
     return render_template('booking.html')
 
+# @app.route('/add-flight')
+# def add_flight():
+    
+
 @app.errorhandler(404)
 def error_handle(error):
     return 'Page not found'
