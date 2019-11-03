@@ -7,13 +7,18 @@ from pprint import pprint
 
 app = Flask(__name__)
 
+#global variables
+flights = []
+booked_fl = []
+
 @app.route('/')
 def hello_world():
     return render_template('index.html')
 
 @app.route('/flights-display', methods = ["GET", "POST"])
 def show_flights():
-    flights = []
+    global flights
+    clas = 'Economy'
     if request.method == 'POST':
         typ = request.form['type']
         print(typ)
@@ -32,6 +37,7 @@ def show_flights():
         clas = request.form['class']
         print(clas)
         flights = find_flights(src, des, dep_date)
+    pprint(flights)
     return render_template('flights.html', flights = flights, clas = clas)
 
 @app.route('/trains-display', methods = ["GET", "POST"])
@@ -91,6 +97,9 @@ def signup():
 
 @app.route('/checkout')
 def checkout():
+    global flights
+    pprint(flights)
+    print('here')
     return render_template('booking.html')
 
 # @app.route('/add-flight')
