@@ -27,8 +27,8 @@ def show_flights():
         print(ret_date)
         adults = request.form['adults']
         print(adults)
-        kids = request.form['kids']
-        print(kids)
+        # kids = request.form['kids']
+        # print(kids)
         clas = request.form['class']
         print(clas)
         flights = find_flights(src, des, dep_date)

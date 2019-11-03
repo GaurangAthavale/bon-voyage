@@ -1,11 +1,16 @@
+body{
+    background: #E1E7EE;
+}
+
 .a{
     background: #fff;
-    border: 2px solid #000;
-    border-radius: 10px;
+    /*border: 2px solid #000;*/
+    border-radius: 5px;
     width: 100%; 
     margin: 2%;
     padding: 1%;
     font-size: 1.25em;
+    box-shadow: 2px 2px 5px grey;
 }
 
 .inner-card .col-3, .col-5{

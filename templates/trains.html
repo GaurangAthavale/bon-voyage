@@ -8,7 +8,7 @@
 
 {% endblock %}
 {% block data %}
-    <div class="radio1">
+    <!-- <div class="radio1">
                     <input type="radio" class="btn" name="check" value="round" checked>Round Trip
                     <input type="radio" class="btn" name="check" value="one">One Way Trip
                 </div>
@@ -20,15 +20,7 @@
                     <div class="input-grp">
                         <label>To</label>
                         <input type="text" class="form-control" placeholder="City" name="to" id="to" required>
-                    </div>
-                    <!-- <label>From</label> -->
-                    <!-- <br> -->
-                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px">
-                    
-                    <label>To</label> -->
-                    <!-- <br> -->
-                    <!-- <input type="text" class="ax form-control" placeholder="City" size="458px"> -->
-                    
+                    </div>                    
                     <div class="input-grp">
                         <label>Departure</label>
                         <input type="date" class="form-control select-date" required>
@@ -44,16 +36,8 @@
                     <div class="input-grp">
                         <label>Children(0-17)</label>
                         <input type="number" class="form-control" value="1">
-                    </div>
-                    <!-- <label>Passengers</label> -->
-                    <!-- <br> -->
-                    <!-- <input type="number" class="ax form-control" value="1"> -->
+                    </div> -->                    
                     <!-- <div class="input-grp">
-                        <label>Children(0-17)</label>
-                        <input type="number" class="form-control" value="0">
-                    </div> -->
-                    
-                    <div class="input-grp">
                         <label>Class</label>
                         <select class="form-control ab">
                             <option value="1">AC 3-Tier</option>
@@ -66,8 +50,8 @@
                         <button class="form-control flight" type="button">Show Trains</button>
                     </div>
                 </div>
-                <hr>
-     <div class="row">           
+                <hr> -->
+     <!-- <div class="row">           
     <div class="col-sm-2 a" style="height: 50%">
         <h2>Filters</h2>
         <hr>
@@ -104,17 +88,32 @@
             </div>
         </div>
     </div>
-    <!-- <div class="vl"></div> -->
-    <div class="col-sm-9" id="one">
+    <div class="vl"></div>-->
+    <div class="a" style="margin :0%; background: #2276E3">
+    <h1>Filters</h1>
+   <div class="input-grp but">
+        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Price</button>
+   </div>
+   <div class="input-grp but">
+        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Duration</button>
+   </div>
+   <div class="input-grp but">
+        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Arrival</button>
+   </div>
+   <div class="input-grp but">
+        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Departure</button>
+   </div>
+   </div>
+    <div class="col-sm-9" style="margin-left: 11.5%">
         {% for train in trains %}
         <div class="container-fluid">
-            <div class="row align-items-center a" style="background: #9cf7d6">
+            <div class="row align-items-center a">
                     <div class="col-3">
                         <i class="fa fa-train" aria-hidden="true"></i> <font style="color: blue">{{ train['trn_name'] }}</font> <br> {{ train['trn_no'] }}
                     </div>
                     <div class="col-5">
                         <div class="container-fluid">
-                            <div class="row align-items-center justify-content-center inner-card a" style="background: #ffabd1">
+                            <div class="row align-items-center justify-content-center inner-card a">
                                 <div class="col-3">
                                     <font style="color: red">{{ train['source'] }}</font> <br><font style="color: green">{{ train['departure time'] }}</font>
                                 </div>
