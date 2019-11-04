@@ -17,49 +17,53 @@
                         </thead>
                         <tbody>
                             {% for fl in flights %}
-                            {% set id = fl['fltno'] %}
-                            {% set id2 = '#' ~ fl['fltno'] %}
+                            {% set id = 'flt' ~ fl['fltno'] %}
+                            {% set id2 = '#' ~ 'flt' ~ fl['fltno'] %}
                             <div class="panel panel-default">
                                 <tr>
-                                    <td><a data-toggle="collapse" data-parent="#accordion" href= {{ id2 }}>BOM - DEL</a></td>
-                                    <td>Rs. 4761</td>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href= {{ id2 }}> {{ fl['fltno'] }} {{ fl['src'] }} - {{ fl['des'] }}</a></td>
+                                    <td>Rs. {{ fl['totalPrice'] }}</td>
                                 </tr>
                                 <tbody id = {{ id }} class="table panel-collapse collapse">
                                     <tr>
-                                        <td>Base Fare</td>
-                                        <td>Rs. 4087</td>
+                                        <td>Base Fare - Rs. {{ fl['baseFare'] }} * {{ fl['pax'] }}</td>
+                                        <td>Rs. {{ fl['totalBaseCost'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Taxes</td>
-                                        <td>Rs. 490.44</td>
+                                        <td>Rs. {{ fl['tax'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Booking Charges</td>
-                                        <td>Rs. 183.10</td>
+                                        <td>Rs. {{ fl['bookingCharge'] }}</td>
                                     </tr>
                                 </tbody>
                             </div>
                             {% endfor %}
+                            {% for tr in trains %}
+                            {% set id = 'trn' ~ tr['trn_no'] %}
+                            {% set id2 = '#' ~ 'trn' ~ tr['trn_no'] %}
                             <div class="panel panel-default">
                                 <tr>
-                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse5">DEL - BOM</a></td>
-                                    <td>Rs. 6413</td>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href= {{ id2 }}> {{ tr['trn_no'] }} {{ tr['source'] }} - {{ tr['destination'] }}</a></td>
+                                    <td>Rs. {{ tr['totalPrice'] }}</td>
                                 </tr>
-                                <tbody id = "collapse5" class="table panel-collapse collapse">
+                                <tbody id = {{ id }} class="table panel-collapse collapse">
                                     <tr>
-                                        <td>Base Fare</td>
-                                        <td>Rs. 5505</td>
+                                        <td>Base Fare - Rs. {{ tr['baseFare'] }} * {{ tr['pax'] }}</td>
+                                        <td>Rs. {{ tr['totalBaseCost'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Taxes</td>
-                                        <td>Rs. 660.60</td>
+                                        <td>Rs. {{ tr['tax'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Booking Charges</td>
-                                        <td>Rs. 246.62</td>
+                                        <td>Rs. {{ tr['bookingCharge'] }}</td>
                                     </tr>
                                 </tbody>
                             </div>
+                            {% endfor %}
                             {% for ht in hotels %}
                             {% set id = 'hotel' ~ ht['id'] %}
                             {% set id2 = '#' ~ 'hotel' ~ ht['id'] %}
@@ -104,7 +108,7 @@
                         <input placeholder="Full name" type="text" name="name">
                         <input placeholder="MM/YY" type="tel" name="expiry">
                         <input placeholder="CVC" type="number" name="cvc">
-                        <h4><b>Amount: &#8377;14259</b></h4>
+                        <h4><b>Amount: &#8377;{{ totalCost }}</b></h4>
                         <button type="button" class="btn btn-success" name="button">Pay now</button>
                     </form>
                 </div>

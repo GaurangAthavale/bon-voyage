@@ -11,7 +11,11 @@ app = Flask(__name__)
 
 #global variables
 flights = []
+clas = 'economy'
+pax = '1'
 trains = []
+tr_pax = '1'
+tr_clas = '3A'
 hotels = []
 roomConf = []
 priceConf = []
@@ -26,7 +30,8 @@ def hello_world():
 @app.route('/flights-display', methods = ["GET", "POST"])
 def show_flights():
     global flights
-    clas = 'Economy'
+    global clas
+    global pax
     if request.method == 'POST':
         typ = request.form['type']
         print(typ)
@@ -38,8 +43,8 @@ def show_flights():
         print(dep_date)
         ret_date = request.form['ret_date']
         print(ret_date)
-        adults = request.form['adults']
-        print(adults)
+        pax = request.form['adults']
+        print(pax)
         # kids = request.form['kids']
         # print(kids)
         clas = request.form['class']
@@ -51,20 +56,38 @@ def show_flights():
 @app.route('/add-flight/<fltno>')
 def add_flight(fltno):
     global booked_fl
+    global clas
+    global pax
     print(fltno)
     print(flights)
     for fl in flights:
         if fl['fltno'] == fltno:
             print('adding', fltno, 'to booked_fl')
-            booked_fl.append(fl)
-            print(fl)
+            fl['baseFare'] = fl['fare'][clas]
+            fl['clas'] = clas
+            fl['pax'] = pax
+            fl['totalBaseCost'] = fl['baseFare'] * int(pax)
+            fl['tax'] = int(fl['totalBaseCost'] * 0.12)
+            fl['bookingCharge'] = int(fl['totalBaseCost'] * 0.04)
+            fl['totalPrice'] = fl['totalBaseCost'] + fl['tax'] + fl['bookingCharge']
+            added = False
+            for el in booked_fl:
+                print(el)
+                if el['fltno'] == fltno:
+                    added = True
+            if not added:
+                booked_fl.append(fl)
+            # print(fl)
             break
     print(booked_fl)
     return redirect('/checkout')
+    # return 'done'
 
 @app.route('/trains-display', methods = ["GET", "POST"])
 def show_trains():
     global trains
+    global tr_pax
+    global tr_clas
     if request.method == 'POST':
         typ = request.form['type']
         print(typ)
@@ -76,25 +99,32 @@ def show_trains():
         print(dep_date)
         ret_date = request.form['ret_date']
         print(ret_date)
-        adults = request.form['adults']
-        print(adults)
-        kids = request.form['kids']
-        print(kids)
-        clas = request.form['class']
-        print(clas)
+        tr_pax = request.form['adults']
+        print(tr_pax)
+        tr_clas = request.form['class']
+        print(tr_clas)
         year, month, date = dep_date.split('-')
-        trains = find_trains(src, des, date, month, year, clas)
+        trains = find_trains(src, des, date, month, year, tr_clas)
     print(trains)
-    return render_template('trains.html', trains = trains, clas = clas)
+    return render_template('trains.html', trains = trains, clas = tr_clas)
 
 @app.route('/add-train/<trno>')
 def add_train(trno):
     global booked_tr
+    global tr_pax
+    global tr_clas
     print(trno)
     print(trains)
     for tr in trains:
         if tr['trn_no'] == trno:
             print('adding', trno, 'to booked_tr')
+            tr['pax'] = tr_pax
+            tr['clas'] = tr_clas
+            tr['baseFare'] = int(tr['fares'][tr_clas][2:])
+            tr['totalBaseCost'] = tr['baseFare'] * int(tr_pax)
+            tr['tax'] = int(tr['totalBaseCost'] * 0.12)
+            tr['bookingCharge'] = int(tr['totalBaseCost'] * 0.04)
+            tr['totalPrice'] = tr['totalBaseCost'] + tr['tax'] + tr['bookingCharge']
             booked_tr.append(tr)
             print(tr)
             break
@@ -182,7 +212,14 @@ def checkout():
     pprint(booked_ht)
     pprint(booked_fl)
     pprint(booked_tr)
-    return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr)
+    totalCost = 0
+    for el in booked_fl:
+        totalCost += el['totalPrice']
+    for el in booked_tr:
+        totalCost += el['totalPrice']
+    for el in booked_ht:
+        totalCost += el['totalPrice']
+    return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr, totalCost = totalCost)
 
 @app.errorhandler(404)
 def error_handle(error):
