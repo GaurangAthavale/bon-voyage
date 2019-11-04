@@ -65,7 +65,7 @@ def show_flights():
         print(clas)
         flights = find_flights(src, des, dep_date)
     pprint(flights)
-    return render_template('flights.html', flights = flights, clas = clas)
+    return render_template('flights.html', flights = flights, clas = clas, login = Login)
 
 @app.route('/fl-sort/<typ>/<reverse>')
 def sort_fl(typ, reverse):
@@ -292,8 +292,15 @@ def pay():
         name = request.form['name']
         cvv = request.form['cvv']
         expiry = request.form['expiry']
-        print(number,name,cvv,expiry)
-    return render_template('booking.html')
+        number = number.replace(' ', '')
+        name = name.lower()
+        mon, yr = cvv.replace(' ', '').split('/')
+        print(number)
+        print(name)
+        print(cvv)
+        print(expiry)
+    # return render_template('booking.html')
+    return 'done'
 
 @app.errorhandler(404)
 def error_handle(error):
