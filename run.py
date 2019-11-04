@@ -47,16 +47,12 @@ def show_flights():
     global clas
     global pax
     if request.method == 'POST':
-        typ = request.form['type']
-        print(typ)
         src = request.form['src']
         print(src)
         des = request.form['des']
         print(des)
         dep_date = request.form['dep_date']
         print(dep_date)
-        ret_date = request.form['ret_date']
-        print(ret_date)
         pax = request.form['adults']
         print(pax)
         # kids = request.form['kids']
@@ -116,16 +112,12 @@ def show_trains():
     global tr_pax
     global tr_clas
     if request.method == 'POST':
-        typ = request.form['type']
-        print(typ)
         src = request.form['src']
         print(src)
         des = request.form['des']
         print(des)
         dep_date = request.form['dep_date']
         print(dep_date)
-        ret_date = request.form['ret_date']
-        print(ret_date)
         tr_pax = request.form['adults']
         print(tr_pax)
         tr_clas = request.form['class']
@@ -290,7 +282,7 @@ def pay():
     if request.method == 'POST':
         number = request.form['number']
         name = request.form['name']
-        cvv = request.form['cvv']
+        cvv = request.form['cvc']
         expiry = request.form['expiry']
         print(number,name,cvv,expiry)
     return render_template('booking.html')

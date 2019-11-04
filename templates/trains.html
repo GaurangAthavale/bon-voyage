@@ -89,7 +89,7 @@
         </div>
     </div>
     <div class="vl"></div>-->
-    <div class="a" style="margin :0%; background: #2276E3">
+    <!-- <div class="a" style="margin :0%; background: #2276E3">
     <h1>Filters</h1>
    <div class="input-grp but">
         <button class="btn btn-primary" style="background: #a2d0fa">Sort By Price</button>
@@ -103,7 +103,23 @@
    <div class="input-grp but">
         <button class="btn btn-primary" style="background: #a2d0fa">Sort By Departure</button>
    </div>
-   </div>
+   </div> -->
+   <div class="a" style="margin :0%; background: #2276E3">
+        <h1>Sort by</h1>
+        <!-- <br> -->
+       <div class="input-grp but">
+            <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/tr-sort/price/norm'">Price - Low to High</button>
+       </div>
+       <div class="input-grp but">
+            <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/tr-sort/price/rev'">Price - High to Low</button>
+       </div>
+       <div class="input-grp but">
+            <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/tr-sort/duration/norm'">Duration - Low to High</button>
+       </div>
+       <div class="input-grp but">
+            <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/tr-sort/duration/rev'">Duration - High to Low</button>
+       </div>
+        </div>
     <div class="col-sm-9" style="margin-left: 11.5%">
         {% for train in trains %}
         <div class="container-fluid">

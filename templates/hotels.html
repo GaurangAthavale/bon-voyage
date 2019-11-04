@@ -7,13 +7,23 @@
     <script src="{{ url_for('static', filename='js/hotel.js') }}"></script>
 {% endblock %}
 {% block data %}
+<div class="a" style="margin :0%; background: #2276E3">
+        <h1>Sort by</h1>
+        <!-- <br> -->
+       <div class="input-grp but">
+            <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/ht-sort/price/norm'">Price - Low to High</button>
+       </div>
+       <div class="input-grp but">
+            <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/ht-sort/price/rev'">Price - High to Low</button>
+       </div>
+        </div>
     <div class="col-sm-11" id="one" style="margin-left: 5%">
         {% for ht in hotels %}
         {% set hid = '' ~ ht['id'] ~ '' %}
         <div class="container-fluid">
             <div class="row a">
                     <div class="col-3">
-                        <img src="{{ url_for('static', filename='images/vv.jpg') }}" height="200" width="350">
+                        <img src="{{ ht['image'] }}" height="200" width="350">
                     </div>
                     <div class="col-5">
                         <div align="margin-left">

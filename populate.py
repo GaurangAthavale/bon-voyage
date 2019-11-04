@@ -126,7 +126,7 @@ def cc():
         c_names[i].append('{:02d}'.format(y))
         data['card_year'] = c_names[i][-1]
         c_names[i].append(str(randint(100,999)))
-        data['cvv'] = c_names[i][-1]
+        data['cvc'] = c_names[i][-1]
         db.child('pay-cards').child(data['card_no']).set(data)
         # print(c_names[i])
 
