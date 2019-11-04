@@ -21,6 +21,7 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
 app = Flask(__name__)
+check = {}
 
 #global variables
 loggedIn = False
@@ -218,6 +219,8 @@ def add_hotel(hid, checkin, checkout):
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     global loggedIn
+    global check
+    # global verification
     successful = "Successfully Signed In!!"
     if request.method == 'POST':
         email = request.form['email']
@@ -232,9 +235,12 @@ def signup():
             "contact" : contact       
         }
         db.child("users").child(contact).set(data)
-        auth.create_user_with_email_and_password(email, pwd)
+        check = auth.create_user_with_email_and_password(email, pwd)
+        print(check)
+        auth.send_email_verification(check['idToken'])
+        verification = auth.get_account_info(check['idToken'])['users'][0]['emailVerified']
         loggedIn = True
-    return render_template('index.html', login = True,s=successful)
+    return render_template('index.html', login = verification,s="Verify your account first! We have mailed you the link.")
 
 @app.route('/checkout')
 def checkout():
@@ -256,6 +262,7 @@ def checkout():
 @app.route('/login',methods=['GET','POST'])
 def login():
     global loggedIn
+    # verification = False
     unsucessful = 'Please enter correct credentials!'
     if(request.method == 'POST'):
         email = request.form['email']
@@ -264,11 +271,18 @@ def login():
         loggedIn = False
         successful = 'Login Successful'+'\nWelcome! '+str(email)
         try:
-            auth.sign_in_with_email_and_password(email,password)
-            loggedIn = True
-            return render_template('index.html',s=successful, login = True) 
+            check = auth.sign_in_with_email_and_password(email,password)
+            # auth.send_email_verification(check['idToken'])
+            print(auth.get_account_info(check['idToken']))
+            verification = auth.get_account_info(check['idToken'])['users'][0]['emailVerified']
+            print(verification)
+            if(verification == False):
+                return render_template('index.html',s="Verify your account first! We have mailed you the link.", login = False)
+            else:
+                loggedIn = True
+                return render_template('index.html',s=successful, login = True) 
         except:
-            return render_template('login.html', us=unsucessful)
+            return render_template('login.html', us=unsucessful, login = False)
     return render_template('login.html')
 
 @app.route('/logout')
