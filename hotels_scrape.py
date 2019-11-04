@@ -11,6 +11,7 @@ def find_hotels(city, checkin, checkout, rooms, guests):
         roomConf += ('&roomConfig='+guests[i])
     pgno = 1
     hotel_list = []
+    hotel_counter = 1
     while True:
         url = 'https://www.oyorooms.com/hotels-in-'+city+'/?checkin='+ina+'%2F'+inb+'%2F'+inc+'&checkout='+outa+'%2F'+outb+'%2F'+outc+'&page='+str(pgno)+roomConf
         print(url)
@@ -23,6 +24,8 @@ def find_hotels(city, checkin, checkout, rooms, guests):
         for row in soup.find_all('div',{'class':'hotelCardListing'}):
             hotels += 1
             info = {}
+            info['id'] = hotel_counter
+            hotel_counter += 1
             imageSection = row.find('div', {'class':'hotelCardListing__imgCardWrapper'})
             images = imageSection.find_all('img')
             nonlz = False
@@ -72,12 +75,13 @@ def find_hotels(city, checkin, checkout, rooms, guests):
                     info['description'] = desctag.text[8:loc].strip()
                     # print(info['description'])
                 policies_ul = dtsoup.find('ul',{'class':'c-f0mxva'})
-                policies_li = policies_ul.find_all('li')
-                policies = []
-                for p in policies_li[1:]:
-                    policies.append(p.text)
-                info['policies'] = policies
-                print(info['policies'])
+                if policies_ul:
+                    policies_li = policies_ul.find_all('li')
+                    policies = []
+                    for p in policies_li[1:]:
+                        policies.append(p.text)
+                    info['policies'] = policies
+                    print(info['policies'])
                 hotel_list.append(info)
         if hotels > 0 and pgno < 4:
             pgno += 1
@@ -85,4 +89,7 @@ def find_hotels(city, checkin, checkout, rooms, guests):
             break
     return hotel_list
 
-# find_hotels('chittorgarh','07-12-2019','10-12-2019','2',['1','2'])
+# ans = find_hotels('mumbai','07-12-2019','10-12-2019','2',['1','2'])
+# print(len(ans))
+# for a in ans:
+#     print(a['id'])

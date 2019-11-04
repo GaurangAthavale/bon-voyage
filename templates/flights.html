@@ -4,6 +4,7 @@
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="{{ url_for('static', filename='js/addStuff.js') }}" ></script>
 
 {% endblock %}
 {% block data %}
@@ -107,6 +108,7 @@
             <div class="row align-items-center a">
                     <div class="col-2">
                         {% set flt = ''+fl['airline']+'.png' %}
+                        {% set fltno = '' + fl['fltno'] + '' %}
                         <img src="{{ url_for('static', filename='images/airline/'+flt) }}" width="100" height="100"><br><font style="color: blue">{{ fl['airline'] }}</font> <br> {{ fl['fltno'] }}<br>
                         <!-- {% for d in fl['dep_days'] %}
                         <b>{{ days[d] }}</b>
@@ -144,7 +146,7 @@
                         &#8377;{{ fl['fare'][clas] }}
                     </div> 
                     <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary" style="background: orange">Book Now</button>
+                        <button class="btn btn-primary" id="fl-add" style="background: orange" onclick="window.location.href = '/add-flight/{{ fltno }}'">Book Now</button>
                     </div>
 
                 </div>

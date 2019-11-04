@@ -16,12 +16,15 @@
                             <th>Price</th>
                         </thead>
                         <tbody>
+                            {% for fl in flights %}
+                            {% set id = fl['fltno'] %}
+                            {% set id2 = '#' ~ fl['fltno'] %}
                             <div class="panel panel-default">
                                 <tr>
-                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">BOM - DEL</a></td>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href= {{ id2 }}>BOM - DEL</a></td>
                                     <td>Rs. 4761</td>
                                 </tr>
-                                <tbody id = "collapse1" class="table panel-collapse collapse">
+                                <tbody id = {{ id }} class="table panel-collapse collapse">
                                     <tr>
                                         <td>Base Fare</td>
                                         <td>Rs. 4087</td>
@@ -36,12 +39,13 @@
                                     </tr>
                                 </tbody>
                             </div>
+                            {% endfor %}
                             <div class="panel panel-default">
                                 <tr>
-                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">DEL - BOM</a></td>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse5">DEL - BOM</a></td>
                                     <td>Rs. 6413</td>
                                 </tr>
-                                <tbody id = "collapse2" class="table panel-collapse collapse">
+                                <tbody id = "collapse5" class="table panel-collapse collapse">
                                     <tr>
                                         <td>Base Fare</td>
                                         <td>Rs. 5505</td>
@@ -56,82 +60,40 @@
                                     </tr>
                                 </tbody>
                             </div>
+                            {% for ht in hotels %}
+                            {% set id = 'hotel' ~ ht['id'] %}
+                            {% set id2 = '#' ~ 'hotel' ~ ht['id'] %}
                             <div class="panel panel-default">
                                 <tr>
-                                    <td><a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Hotel</a></td>
-                                    <td>Rs. 3085</td>
+                                    <td><a data-toggle="collapse" data-parent="#accordion" href= {{ id2 }}>{{ ht['name'][4:] }}</a></td>
+                                    <td>Rs. {{ ht['totalPrice'] }}</td>
                                 </tr>
-                                <tbody id = "collapse3" class="table panel-collapse collapse">
+                                <tbody id = {{ id }} class="table panel-collapse collapse">
+                                    {% for i in ht['roomCount'] %}
                                     <tr>
-                                        <td>Rs. 1324 x 2 nights</td>
-                                        <td>Rs. 2648</td>
+                                        <td>Room for {{ ht['roomConf'][i] }} - Rs. {{ ht['priceConf'][i] }} x {{ ht['days'] }} nights</td>
+                                        <td>Rs. {{ ht['finalPriceConf'][i] }}</td>
                                     </tr>
+                                    {% endfor %}
                                     <tr>
                                         <td>Taxes</td>
-                                        <td>Rs. 317.76</td>
+                                        <td>Rs. {{ ht['tax'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Booking Charges</td>
-                                        <td>Rs. 118.63</td>
+                                        <td>Rs. {{ ht['bookingCharge'] }}</td>
                                     </tr>
                                 </tbody>
                                 <tbody>
                                     <tr>
                                         <td><b>Total</b></td>
-                                        <td><b>Rs. 14259</b></td>
+                                        <td><b>Rs. xxx</b></td>
                                     </tr>
                                 </tbody>
                             </div>
+                            {% endfor %}
                         </tbody>
                     </table>
-<!--                 <table class = "table table-hover">
-                        <thead>
-                            <th>Details</th>
-                            <th>Price</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>BOM - DEL</td>
-                                <td>Rs. 4000</td>
-                            </tr>
-                            <tr>
-                                <td>Base Fare</td>
-                                <td>Rs. 3500</td>
-                            </tr>
-                            <tr>
-                                <td>Taxes</td>
-                                <td>Rs. 500</td>
-                            </tr>
-                            <tr>
-                                <td>DEL - BOM</td>
-                                <td>Rs. 3000</td>
-                            </tr>
-                            <tr>
-                                <td>Base Fare</td>
-                                <td>Rs. 2650</td>
-                            </tr>
-                            <tr>
-                                <td>Taxes</td>
-                                <td>Rs. 350</td>
-                            </tr>
-                            <tr>
-                                <td>Hotel</td>
-                                <td>Rs. 4000</td>
-                            </tr>
-                            <tr>
-                                <td>Rs. 1600 x 2 nights</td>
-                                <td>Rs. 3200</td>
-                            </tr>
-                            <tr>
-                                <td>Taxes</td>
-                                <td>Rs. 800</td>
-                            </tr>
-                            <tr>
-                                <td><b>Total</b></td>
-                                <td><b>Rs. 11000</b></td>
-                            </tr>
-                        </tbody>
-                    </table> -->
                 </div>
             </div>
             <div class="col-6">

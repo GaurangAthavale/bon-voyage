@@ -9,6 +9,7 @@
 {% block data %}
     <div class="col-sm-11" id="one" style="margin-left: 5%">
         {% for ht in hotels %}
+        {% set hid = '' ~ ht['id'] ~ '' %}
         <div class="container-fluid">
             <div class="row a">
                     <div class="col-3">
@@ -40,7 +41,7 @@
                     {% endfor %}
                     </ul>
  -->                    <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary">Book now</button>
+                        <button class="btn btn-primary" onclick="window.location.href = '/add-hotel/{{ hid }}/{{ checkin }}/{{ checkout }}'">Book now</button>
                     </div>
                     <div class = "table table-hover panel-group" id = "accordion">
                         <!-- <thead>

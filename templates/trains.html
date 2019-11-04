@@ -109,6 +109,7 @@
         <div class="container-fluid">
             <div class="row align-items-center a">
                     <div class="col-3">
+                        {% set trno = '' + train['trn_no'] + '' %}
                         <i class="fa fa-train" aria-hidden="true"></i> <font style="color: blue">{{ train['trn_name'] }}</font> <br> {{ train['trn_no'] }}
                     </div>
                     <div class="col-5">
@@ -130,7 +131,7 @@
                         {{ train['fares'][clas] }}
                     </div>
                     <div class="col-2 align-self-center but">
-                        <button class="btn btn-primary" style="background: orange">Book now</button>
+                        <button class="btn btn-primary" style="background: orange" onclick="window.location.href = '/add-train/{{ trno }}'">Book now</button>
                     </div>
 
                 </div>

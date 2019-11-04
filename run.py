@@ -2,14 +2,22 @@ from db_connections import find_flights
 from trains_scrape import find_trains
 from hotels_scrape import find_hotels
 from conversions import find_flt_duration
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from pprint import pprint
+from datetime import date
+from random import randint
 
 app = Flask(__name__)
 
 #global variables
 flights = []
+trains = []
+hotels = []
+roomConf = []
+priceConf = []
 booked_fl = []
+booked_tr = []
+booked_ht = []
 
 @app.route('/')
 def hello_world():
@@ -40,9 +48,23 @@ def show_flights():
     pprint(flights)
     return render_template('flights.html', flights = flights, clas = clas)
 
+@app.route('/add-flight/<fltno>')
+def add_flight(fltno):
+    global booked_fl
+    print(fltno)
+    print(flights)
+    for fl in flights:
+        if fl['fltno'] == fltno:
+            print('adding', fltno, 'to booked_fl')
+            booked_fl.append(fl)
+            print(fl)
+            break
+    print(booked_fl)
+    return redirect('/checkout')
+
 @app.route('/trains-display', methods = ["GET", "POST"])
 def show_trains():
-    trains = []
+    global trains
     if request.method == 'POST':
         typ = request.form['type']
         print(typ)
@@ -62,12 +84,27 @@ def show_trains():
         print(clas)
         year, month, date = dep_date.split('-')
         trains = find_trains(src, des, date, month, year, clas)
-        print(trains)
+    print(trains)
     return render_template('trains.html', trains = trains, clas = clas)
+
+@app.route('/add-train/<trno>')
+def add_train(trno):
+    global booked_tr
+    print(trno)
+    print(trains)
+    for tr in trains:
+        if tr['trn_no'] == trno:
+            print('adding', trno, 'to booked_tr')
+            booked_tr.append(tr)
+            print(tr)
+            break
+    print(booked_tr)
+    return redirect('/checkout')
 
 @app.route('/hotels-display', methods = ['GET', 'POST'])
 def show_hotels():
-    hotels = []
+    global hotels
+    global roomConf
     if request.method == 'POST':
         city = request.form['city']
         print(city)
@@ -79,13 +116,55 @@ def show_hotels():
         print(room1)
         room2 = request.form['room2']
         print(room2)
+        roomConf = [room1, room2]
         hotels = find_hotels(city, checkin, checkout, '2', [room1, room2])
-        print(len(hotels))
-        pprint(hotels[0])
-        pprint(hotels[1])
-        # for hotel in hotels:
-        #     print(hotel['name'],hotel['priceRange'],sep=':')
-    return render_template('hotels.html', hotels=hotels)
+    print(len(hotels))
+    pprint(hotels[0])
+    pprint(hotels[1])
+    # for hotel in hotels:
+    #     print(hotel['name'],hotel['priceRange'],sep=':')
+    return render_template('hotels.html', hotels=hotels, checkin = checkin, checkout = checkout)
+
+@app.route('/add-hotel/<hid>/<checkin>/<checkout>')
+def add_hotel(hid, checkin, checkout):
+    global booked_ht
+    global roomConf
+    global priceConf
+    print(hid)
+    yr, month, day = checkin.split('-')
+    checkin = date(int(yr), int(month), int(day))
+    yr, month, day = checkout.split('-')
+    checkout = date(int(yr), int(month), int(day))
+    days = (checkout - checkin).days
+    print(days)
+    print(roomConf)
+    print(len(hotels))
+    for ht in hotels:
+        if str(ht['id']) == hid:
+            print('adding', ht, 'to booked_ht')
+            base = int(ht['price'][1:])
+            adder = randint(300,500)
+            priceConf = [0]*len(roomConf)
+            for i in range(len(roomConf)):
+                if roomConf[i] == '3' or roomConf[i] == 3:
+                    priceConf[i] = base + adder
+                else:
+                    priceConf[i] = base
+            ht['roomConf'] = roomConf
+            ht['priceConf'] = priceConf
+            ht['days'] = days
+            ht['roomCount'] = [i for i in range(len(roomConf))]
+            ht['finalPriceConf'] = [x*days for x in priceConf]
+            ht['totalBaseCost'] = sum(ht['finalPriceConf'])
+            ht['tax'] = int(ht['totalBaseCost'] * 0.12)
+            ht['bookingCharge'] = int(ht['totalBaseCost'] * 0.04)
+            ht['totalPrice'] = ht['totalBaseCost'] + ht['tax'] + ht['bookingCharge']
+            booked_ht.append(ht)
+            print(ht)
+            break
+    print(booked_ht)
+    return redirect('/checkout')
+    # return 'done'
 
 @app.route('/login')
 def login():
@@ -97,14 +176,13 @@ def signup():
 
 @app.route('/checkout')
 def checkout():
-    global flights
-    pprint(flights)
-    print('here')
-    return render_template('booking.html')
-
-# @app.route('/add-flight')
-# def add_flight():
-    
+    global booked_fl
+    global booked_tr
+    global booked_ht
+    pprint(booked_ht)
+    pprint(booked_fl)
+    pprint(booked_tr)
+    return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr)
 
 @app.errorhandler(404)
 def error_handle(error):
