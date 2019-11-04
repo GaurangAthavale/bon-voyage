@@ -2,6 +2,7 @@ from db_connections import find_flights
 from trains_scrape import find_trains
 from hotels_scrape import find_hotels
 from conversions import find_flt_duration
+from conversions import find_dur_mins
 from flask import Flask, render_template, request, redirect
 from pprint import pprint
 from datetime import date
@@ -52,6 +53,19 @@ def show_flights():
         flights = find_flights(src, des, dep_date)
     pprint(flights)
     return render_template('flights.html', flights = flights, clas = clas)
+
+@app.route('/fl-sort/<typ>/<reverse>')
+def sort_fl(typ, reverse):
+    global flights
+    if typ == "price" and reverse == "norm":
+        flights = sorted(flights, key = lambda i:i['fare'][clas])
+    elif typ == "price" and reverse == "rev":
+        flights = sorted(flights, key = lambda i:i['fare'][clas], reverse=True)
+    elif typ == "duration" and reverse == "norm":
+        flights = sorted(flights, key = lambda i:find_dur_mins(i['duration']))
+    elif typ == "duration" and reverse == "rev":
+        flights = sorted(flights, key = lambda i:find_dur_mins(i['duration']), reverse=True)
+    return redirect('/flights-display')
 
 @app.route('/add-flight/<fltno>')
 def add_flight(fltno):

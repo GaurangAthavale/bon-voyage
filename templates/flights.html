@@ -86,21 +86,21 @@
     </div> -->
     <!-- <div class="vl"></div> -->
     <div class="a" style="margin :0%; background: #2276E3">
-    <h1>Filters</h1>
-    <br>
+    <h1>Sort by</h1>
+    <!-- <br> -->
    <div class="input-grp but">
-        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Price</button>
-   </div>
-   <div class="input-grp but">
-        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Duration</button>
+        <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/fl-sort/price/norm'">Price - Low to High</button>
    </div>
    <div class="input-grp but">
-        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Arrival</button>
+        <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/fl-sort/price/rev'">Price - High to Low</button>
    </div>
    <div class="input-grp but">
-        <button class="btn btn-primary" style="background: #a2d0fa">Sort By Departure</button>
+        <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/fl-sort/duration/norm'">Duration - Low to High</button>
    </div>
+   <div class="input-grp but">
+        <button class="btn btn-primary" style="background: #a2d0fa" onclick="window.location.href = '/fl-sort/duration/rev'">Duration - High to Low</button>
    </div>
+    </div>
     <div class="col-sm-9 trip one" style="margin-left: 11.5%">
         {% set days = ["M","T","W","T","F","S","S"] %}
         {% for fl in flights %}
