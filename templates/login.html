@@ -23,25 +23,46 @@
             </div>
         </div>
         <hr>
+        {% if s %}
+		<div class="alert alert-success">
+			{{s}}
+		</div>
+	    {% endif %}
+	    {% if us %}
+		<div class="alert alert-danger">
+			{{us}}
+		</div>
+	    {% endif %}
+        <form action="/login" method = "POST">
         <div class="booking-form login">
             <label>E-mail</label>
-            <input type="text" class="form-control" placeholder="Username">
+            <input type="text" class="form-control" name="email" placeholder="Username">
             <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" name="password" placeholder="Password">
             <br>
-            <button class="btn btn-primary" type="button">Log In</button>
+            <button class="btn btn-primary" type="submit">Log In</button>
         </div>
+        </form>
+        {% if su %}
+		<div class="alert alert-success">
+			{{su}}
+		</div>
+	    {% endif %}
+        <form action="/signup" method = "POST">
         <div class="booking-form signup">
             <label>Name</label>
-            <input type="text" class="form-control" placeholder="Name">
+            <input type="text" class="form-control" placeholder="Name" name="name">
             <label>E-mail</label>
-            <input type="text" class="form-control" placeholder="E-mail">
+            <input type="text" class="form-control" placeholder="E-mail" name="email">
             <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" placeholder="Password" name="password">
             <label>City</label>
-            <input type="text" class="form-control" placeholder="City">
+            <input type="text" class="form-control" placeholder="City" name="city">
+            <label>Contact</label>
+            <input type="text" class="form-control" placeholder="Contact" name="contact">
             <br>
-            <button class="btn btn-primary" type="button">Sign Up</button>
+            <button class="btn btn-primary" type="submit">Sign Up</button>
         </div>
+        </form>
     </div>
 {% endblock %}

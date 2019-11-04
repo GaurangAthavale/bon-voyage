@@ -10,6 +10,11 @@
 	{% endblock %}
 </head>
 <body>
+	<!-- {% if s %}
+		<div class="alert alert-success">
+			{{s}}
+		</div>
+	{% endif %} -->
 	<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
 		<a class="navbar-brand" href="/">Bon Voyage</a>
 		<div class="collapse navbar-collapse" id="navbarText">
@@ -27,7 +32,8 @@
 					<span class="nav-link" id = "show-htl-srch"><i class="fa fa-home" aria-hidden="true"></i> Hotels</span>
 		      	</li>
 		    </ul>
-		    <span class="navbar-text">
+			{% if login == false %}
+			<span class="navbar-text">
 				<ul class="navbar-nav mr-auto">
 			      	<li class="nav-item">
 			        	<a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
@@ -35,10 +41,24 @@
 			      	<!-- <li class="nav-item">
 			        	<a class="nav-link" href="/signup">Sign Up</a>
 			      	</li> -->
-			    </ul>
-		    </span>
+				</ul>
+			</span>
+			{% else %}
+			<span class="navbar-text">
+					<ul class="navbar-nav mr-auto">
+						  <li class="nav-item">
+							<a class="nav-link" href="/logout"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
+						  </li>
+					</ul>
+				</span>
+			{% endif %}
 		  </div>
 	</nav>
+	{% if s %}
+		<div class="alert alert-success">
+			{{s}}
+		</div>
+	{% endif %}
 	{% block data %}
 	<div class="container-fluid">
 		<div class="row align-items-center">

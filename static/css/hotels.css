@@ -4,8 +4,9 @@ body{
 
 .a{
     background: #fff;
-    border: 2px solid #000;
+    /* border: 2px solid #000; */
     /*border-radius: 10px;*/
+    box-shadow: 2px 2px 5px grey;
     width: 100%; 
     margin: 2%;
     padding: 1%;

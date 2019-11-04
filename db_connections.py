@@ -9,6 +9,7 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
 db = firebase.database()
 
 def find_flights(src, dest, dep_date):
@@ -28,3 +29,4 @@ def find_flights(src, dest, dep_date):
     print(len(valids))
     # print(valids)
     return valids
+

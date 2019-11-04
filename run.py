@@ -1,3 +1,5 @@
+import db_connections
+import pyrebase
 from db_connections import find_flights
 from trains_scrape import find_trains
 from hotels_scrape import find_hotels
@@ -7,9 +9,20 @@ from pprint import pprint
 from datetime import date
 from random import randint
 
+config = {
+    "apiKey": "AIzaSyAiPuEH6tsR4h36GJKDzKtv87-2E9u0_oA",
+    "authDomain": "bon-voyage-d2ff1.firebaseapp.com",
+    "databaseURL": "https://bon-voyage-d2ff1.firebaseio.com",
+    "storageBucket": "bon-voyage-d2ff1.appspot.com"
+}
+
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
+db = firebase.database()
 app = Flask(__name__)
 
 #global variables
+loggedIn = False
 flights = []
 trains = []
 hotels = []
@@ -21,7 +34,7 @@ booked_ht = []
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    return render_template('index.html', login = loggedIn)
 
 @app.route('/flights-display', methods = ["GET", "POST"])
 def show_flights():
@@ -166,13 +179,26 @@ def add_hotel(hid, checkin, checkout):
     return redirect('/checkout')
     # return 'done'
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/signup')
+@app.route('/signup',methods=['GET','POST'])
 def signup():
-    return render_template('signup.html')
+    global loggedIn
+    successful = "Successfully Signed In!!"
+    if request.method == 'POST':
+        email = request.form['email']
+        name = request.form['name']
+        pwd = request.form['password']
+        city = request.form['city']
+        contact = request.form['contact']
+        data = {
+            "email" : email,
+            "name" : name,
+            "city" : city,
+            "contact" : contact       
+        }
+        db.child("users").child(contact).set(data)
+        auth.create_user_with_email_and_password(email, pwd)
+        loggedIn = True
+    return render_template('index.html', login = True,s=successful)
 
 @app.route('/checkout')
 def checkout():
@@ -183,6 +209,40 @@ def checkout():
     pprint(booked_fl)
     pprint(booked_tr)
     return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr)
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    global loggedIn
+    unsucessful = 'Please enter correct credentials!'
+    if(request.method == 'POST'):
+        email = request.form['email']
+        password = request.form['password']
+        print(email, password)
+        loggedIn = False
+        successful = 'Login Successful'+'\nWelcome! '+str(email)
+        try:
+            auth.sign_in_with_email_and_password(email,password)
+            loggedIn = True
+            return render_template('index.html',s=successful, login = True) 
+        except:
+            return render_template('login.html', us=unsucessful)
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    global loggedIn
+    loggedIn = False
+    return render_template('index.html', login = False)
+
+@app.route('/pay',methods=['GET','POST'])
+def pay():
+    if request.method == 'POST':
+        number = request.form['number']
+        name = request.form['name']
+        cvv = request.form['cvv']
+        expiry = request.form['expiry']
+        print(number,name,cvv,expiry)
+    return render_template('booking.html')
 
 @app.errorhandler(404)
 def error_handle(error):
