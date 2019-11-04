@@ -18,3 +18,10 @@ def find_flt_duration(dep, arr, dd, ad):
         hrs -= 1
         mins += 60
     return '{:02d}'.format(hrs) + ':' + '{:02d}'.format(mins)
+
+def find_dur_mins(dur):
+    hrs, mins = dur.split(':')
+    ans = int(mins) + int(hrs)*60
+    return ans
+
+# find_dur_mins('02:20')
