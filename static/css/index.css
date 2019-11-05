@@ -107,8 +107,13 @@ body{
 .input-grp{
     width: 229px;
     display: inline-block;
-    margin-left: 0%
+    margin-left: 0%   
+}
 
+.input-grp-2{
+    width: 458px;
+    /* display: inline-block; */
+    margin-left: 26%   
     
 }
 

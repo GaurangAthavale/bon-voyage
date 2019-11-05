@@ -78,7 +78,7 @@ $(document).ready(function(){
         console.log(num + 1);
 
         var newRoom = document.createElement('div');
-        newRoom.className = "input-grp";
+        newRoom.className = "input-grp-2";
 
         var labelNode = document.createElement('label');
         var label = document.createTextNode('Room ' + (num+1));
@@ -88,7 +88,9 @@ $(document).ready(function(){
         var inputNode = document.createElement('input');
         inputNode.className = "form-control";
         inputNode.setAttribute('type','number');
-        inputNode.setAttribute('value',0);
+        inputNode.setAttribute('value',1);
+        inputNode.setAttribute('min',1);
+        inputNode.setAttribute('max',3);
         inputNode.name = "room"+(num+1);
         newRoom.appendChild(inputNode);
 
