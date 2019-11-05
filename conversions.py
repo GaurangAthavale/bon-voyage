@@ -24,4 +24,12 @@ def find_dur_mins(dur):
     ans = int(mins) + int(hrs)*60
     return ans
 
-# find_dur_mins('02:20')
+def find_dur_mins_tr(dur):
+    hrs, mins = dur.split(':')
+    hrs = hrs.strip()[:-1]
+    mins = mins.strip()[:-1]
+    # print(hrs, mins)
+    ans = int(mins) + int(hrs)*60
+    return ans
+
+# print(find_dur_mins_tr('26H :2M'))

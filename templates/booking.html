@@ -4,6 +4,11 @@
 {% endblock %}
 {% block data %}
 <body>
+{% if wrongCardDeets %}
+<script>
+alert('Please enter correct card details')
+</script>
+{% endif %}
 <!-- booking charges 4% for bon-voyage -->
     <div class="container-fluid">
         <div class="row align-items-center justify-space-around">
@@ -86,12 +91,6 @@
                                     <tr>
                                         <td>Booking Charges</td>
                                         <td>Rs. {{ ht['bookingCharge'] }}</td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td><b>Total</b></td>
-                                        <td><b>Rs. xxx</b></td>
                                     </tr>
                                 </tbody>
                             </div>
