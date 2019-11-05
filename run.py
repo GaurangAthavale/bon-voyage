@@ -3,8 +3,7 @@ import pyrebase
 from db_connections import find_flights
 from trains_scrape import find_trains
 from hotels_scrape import find_hotels
-from conversions import find_flt_duration
-from conversions import find_dur_mins
+from conversions import find_flt_duration, find_dur_mins, find_dur_mins_tr
 from flask import Flask, render_template, request, redirect
 from pprint import pprint
 from datetime import date
@@ -33,6 +32,8 @@ tr_pax = '1'
 tr_clas = '3A'
 hotels = []
 roomConf = []
+checkin = '2019-11-15'
+checkout = '2019-11-22'
 priceConf = []
 booked_fl = []
 booked_tr = []
@@ -62,11 +63,12 @@ def show_flights():
         print(clas)
         flights = find_flights(src, des, dep_date)
     pprint(flights)
-    return render_template('flights.html', flights = flights, clas = clas, login = Login)
+    return render_template('flights.html', flights = flights, clas = clas, login = loggedIn)
 
 @app.route('/fl-sort/<typ>/<reverse>')
 def sort_fl(typ, reverse):
     global flights
+    global clas
     if typ == "price" and reverse == "norm":
         flights = sorted(flights, key = lambda i:i['fare'][clas])
     elif typ == "price" and reverse == "rev":
@@ -128,6 +130,20 @@ def show_trains():
     print(trains)
     return render_template('trains.html', trains = trains, clas = tr_clas)
 
+@app.route('/tr-sort/<typ>/<reverse>')
+def sort_tr(typ, reverse):
+    global trains
+    global tr_clas
+    if typ == "price" and reverse == "norm":
+        trains = sorted(trains, key = lambda i:int(i['fares'][tr_clas][2:]))
+    elif typ == "price" and reverse == "rev":
+        trains = sorted(trains, key = lambda i:int(i['fares'][tr_clas][2:]), reverse=True)
+    elif typ == "duration" and reverse == "norm":
+        trains = sorted(trains, key = lambda i:find_dur_mins_tr(i['duration']))
+    elif typ == "duration" and reverse == "rev":
+        trains = sorted(trains, key = lambda i:find_dur_mins_tr(i['duration']), reverse=True)
+    return redirect('/trains-display')
+
 @app.route('/add-train/<trno>')
 def add_train(trno):
     global booked_tr
@@ -155,6 +171,8 @@ def add_train(trno):
 def show_hotels():
     global hotels
     global roomConf
+    global checkin
+    global checkout
     if request.method == 'POST':
         city = request.form['city']
         print(city)
@@ -162,18 +180,38 @@ def show_hotels():
         print(checkin)
         checkout = request.form['checkout']
         print(checkout)
-        room1 = request.form['room1']
-        print(room1)
-        room2 = request.form['room2']
-        print(room2)
-        roomConf = [room1, room2]
-        hotels = find_hotels(city, checkin, checkout, '2', [room1, room2])
+        roomConf.append(request.form['room1'])
+        x = 2
+        while True:
+            key = 'room' + str(x)
+            print('key', key)
+            try:
+                print(request.form[key])
+                roomConf.append(request.form[key])
+            except:
+                break
+            x += 1
+        hotels = find_hotels(city, checkin, checkout, str(len(roomConf)), roomConf)
+    print(roomConf)
     print(len(hotels))
-    pprint(hotels[0])
-    pprint(hotels[1])
+    try:
+        pprint(hotels[0])
+    except:
+        print('no hotel lmao')
+    # pprint(hotels[1])
     # for hotel in hotels:
     #     print(hotel['name'],hotel['priceRange'],sep=':')
     return render_template('hotels.html', hotels=hotels, checkin = checkin, checkout = checkout)
+
+@app.route('/ht-sort/price/<reverse>')
+def sort_ht(reverse):
+    global hotels
+    global clas
+    if reverse == "norm":
+        hotels = sorted(hotels, key = lambda i:int(i['price'][1:]))
+    elif reverse == "rev":
+        hotels = sorted(hotels, key = lambda i:int(i['price'][1:]), reverse=True)
+    return redirect('/hotels-display')
 
 @app.route('/add-hotel/<hid>/<checkin>/<checkout>')
 def add_hotel(hid, checkin, checkout):
@@ -294,18 +332,35 @@ def logout():
 @app.route('/pay',methods=['GET','POST'])
 def pay():
     if request.method == 'POST':
-        number = request.form['number']
-        name = request.form['name']
-        cvv = request.form['cvc']
-        expiry = request.form['expiry']
+        number = str(request.form['number'])
+        name = str(request.form['name'])
+        cvv = str(request.form['cvc'])
+        expiry = str(request.form['expiry'])
         number = number.replace(' ', '')
         name = name.lower()
-        mon, yr = cvv.replace(' ', '').split('/')
+        mon, yr = expiry.replace(' ', '').split('/')
         print(number)
         print(name)
         print(cvv)
-        print(expiry)
-    # return render_template('booking.html')
+        print(expiry, mon, yr)
+        valid = False
+        if valid:
+            return redirect('/')
+        else:
+            global booked_fl
+            global booked_tr
+            global booked_ht
+            pprint(booked_ht)
+            pprint(booked_fl)
+            pprint(booked_tr)
+            totalCost = 0
+            for el in booked_fl:
+                totalCost += el['totalPrice']
+            for el in booked_tr:
+                totalCost += el['totalPrice']
+            for el in booked_ht:
+                totalCost += el['totalPrice']
+            return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr, totalCost = totalCost, wrongCardDeets = True)
     return 'done'
 
 @app.errorhandler(404)
