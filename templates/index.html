@@ -32,23 +32,22 @@
 					<span class="nav-link" id = "show-htl-srch"><i class="fa fa-home" aria-hidden="true"></i> Hotels</span>
 		      	</li>
 		    </ul>
-			{% if login == true %}
 			<span class="navbar-text">
 				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/checkout"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout</a>
+					</li>		
+					{% if login == true %}
 			      	<li class="nav-item">
 			        	<a class="nav-link" href="/logout"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
 			      	</li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+					</li>
+					{% endif %}
 				</ul>
 			</span>
-			{% else %}
-			<span class="navbar-text">
-					<ul class="navbar-nav mr-auto">
-						  <li class="nav-item">
-							<a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
-						  </li>
-					</ul>
-				</span>
-			{% endif %}
 		  </div>
 	</nav>
 	{% if s %}
@@ -73,7 +72,7 @@
 							<div class="w1">
 									<label>Departure</label>
 									<br>
-									<input type="date" class="ax form-control" size="458px" name="dep_date" required>
+									<input type="date" class="ax form-control" id = "dep-date-fl" size="458px" name="dep_date" required>
 								</div>
 					<label>Passengers</label>
 					<br>
@@ -107,7 +106,7 @@
 					<div class="w1">
 						<label>Departure</label>
 						<br>
-						<input type="date" class="ax form-control" size="458px" name="dep_date" required>
+						<input type="date" class="ax form-control" id = "dep-date-tr" size="458px" name="dep_date" required>
 					</div>
 					<label>Passengers</label>
 					<br>
@@ -139,11 +138,11 @@
 						<br>
 						<div class="input-grp">
 							<label>Check In</label>
-							<input type="date" class="form-control select-date" name="checkin" required>
+							<input type="date" class="form-control select-date" id = "dep-date-ht" name="checkin" required>
 						</div>
 						<div class="input-grp">
 							<label>Check Out</label>
-							<input type="date" class="form-control select-date" name="checkout" required>
+							<input type="date" class="form-control select-date" id = "ret-date-ht" name="checkout" required>
 						</div>
 						<br>
 						<div id = "rooms-ip">

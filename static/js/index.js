@@ -93,5 +93,30 @@ $(document).ready(function(){
         newRoom.appendChild(inputNode);
 
         roomsIpDiv.appendChild(newRoom);
-        });        
+    });       
+        
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+    
+        var flDepDate = document.getElementById('dep-date-fl');
+        flDepDate.setAttribute('min', today);
+        flDepDate.setAttribute('value', today);        
+
+        var trDepDate = document.getElementById('dep-date-tr');
+        trDepDate.setAttribute('min', today);
+        trDepDate.setAttribute('value', today);                
+
+        var htDepDate = document.getElementById('dep-date-ht');
+        htDepDate.setAttribute('min', today);
+        htDepDate.setAttribute('value', today);                
+
+        htDepDate.onchange = function() {
+            var htRetDate = document.getElementById('ret-date-ht');
+            depDate = htDepDate.value;
+            htRetDate.setAttribute('min', depDate);
+            // htRetDate.setAttribute('value', today);                
+        }        
+
 });
