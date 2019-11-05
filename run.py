@@ -24,6 +24,7 @@ check = {}
 
 #global variables
 loggedIn = False
+userId = None
 flights = []
 clas = 'economy'
 pax = '1'
@@ -301,6 +302,7 @@ def checkout():
 @app.route('/login',methods=['GET','POST'])
 def login():
     global loggedIn
+    global userId
     # verification = False
     unsucessful = 'Please enter correct credentials!'
     if(request.method == 'POST'):
@@ -319,7 +321,16 @@ def login():
                 return render_template('index.html',s="Verify your account first! We have mailed you the link.", login = False)
             else:
                 loggedIn = True
-                return render_template('index.html',s=successful, login = True) 
+                users = db.child('users').get()
+                print(users)
+                print('here')
+                for user in users.each():
+                    if user.val()['email'] == email:
+                        print('found')
+                        print(user.key())
+                        userId = user.key()
+                print(userId)
+                return render_template('index.html',s=successful, login = True)
         except:
             return render_template('login.html', us=unsucessful, login = False)
     return render_template('login.html')
@@ -327,11 +338,15 @@ def login():
 @app.route('/logout')
 def logout():
     global loggedIn
+    userId = None
     loggedIn = False
     return render_template('index.html', login = False)
 
 @app.route('/pay',methods=['GET','POST'])
 def pay():
+    global booked_fl
+    global booked_tr
+    global booked_ht
     if request.method == 'POST':
         number = str(request.form['number'])
         name = str(request.form['name'])
@@ -361,11 +376,39 @@ def pay():
                                 print('cvv matched')
                                 valid = True
         if valid:
-            return redirect('/')
+            print('put all the booked stuff to the db')
+            users = db.child('users').get()
+            userObject = None
+            for user in users.each():
+                if user.key() == userId:
+                    userObject = user
+            print(userObject.val())
+            if len(booked_fl) > 0:
+                if 'booked-flights' not in userObject.val():
+                    fl = booked_fl
+                else:
+                    fl = userObject.val()['booked-flights']
+                    fl.append(booked_fl)
+                data = db.child('users').child(userId).update({'booked-flights':fl})
+            if len(booked_tr) > 0:
+                if 'booked-trains' not in userObject.val():
+                    tr = booked_tr
+                else:
+                    tr = userObject.val()['booked-trains']
+                    tr.append(booked_tr)
+                data = db.child('users').child(userId).update({'booked-trains':tr})
+            if len(booked_ht) > 0:
+                if 'booked-hotels' not in userObject.val():
+                    ht = booked_ht
+                else:
+                    ht = userObject.val()['booked-hotels']
+                    ht.append(booked_ht)
+                data = db.child('users').child(userId).update({'booked-hotels':ht})
+            booked_tr = []
+            booked_fl = []
+            booked_ht = []
+            return render_template('index.html', s="Your booking has been done")
         else:
-            global booked_fl
-            global booked_tr
-            global booked_ht
             pprint(booked_ht)
             pprint(booked_fl)
             pprint(booked_tr)
