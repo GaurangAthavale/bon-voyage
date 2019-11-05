@@ -32,11 +32,11 @@
 					<span class="nav-link" id = "show-htl-srch"><i class="fa fa-home" aria-hidden="true"></i> Hotels</span>
 		      	</li>
 		    </ul>
-			{% if login == false %}
+			{% if login == true %}
 			<span class="navbar-text">
 				<ul class="navbar-nav mr-auto">
 			      	<li class="nav-item">
-			        	<a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+			        	<a class="nav-link" href="/logout"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
 			      	</li>
 				</ul>
 			</span>
@@ -44,7 +44,7 @@
 			<span class="navbar-text">
 					<ul class="navbar-nav mr-auto">
 						  <li class="nav-item">
-							<a class="nav-link" href="/logout"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
+							<a class="nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
 						  </li>
 					</ul>
 				</span>

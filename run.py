@@ -285,6 +285,7 @@ def checkout():
     global booked_fl
     global booked_tr
     global booked_ht
+    global loggedIn
     pprint(booked_ht)
     pprint(booked_fl)
     pprint(booked_tr)
@@ -295,7 +296,7 @@ def checkout():
         totalCost += el['totalPrice']
     for el in booked_ht:
         totalCost += el['totalPrice']
-    return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr, totalCost = totalCost)
+    return render_template('booking.html', hotels = booked_ht, flights = booked_fl, trains = booked_tr, totalCost = totalCost, login = loggedIn)
 
 @app.route('/login',methods=['GET','POST'])
 def login():

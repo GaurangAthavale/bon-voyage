@@ -9,6 +9,11 @@
 alert('Please enter correct card details')
 </script>
 {% endif %}
+{% if login == False %}
+<div class="alert alert-danger">
+    You will not be able to continue with payment unless you login or create your account
+</div>
+{% endif %}
 <!-- booking charges 4% for bon-voyage -->
     <div class="container-fluid">
         <div class="row align-items-center justify-space-around">
@@ -103,12 +108,16 @@ alert('Please enter correct card details')
                 <div class="card-wrapper"></div>
                 <div class="form-container active">
                     <form action="/pay" method ="POST">
-                        <input placeholder="Card number" type="tel" name="number">
-                        <input placeholder="Full name" type="text" name="name">
-                        <input placeholder="MM/YY" type="tel" name="expiry">
-                        <input placeholder="CVV" type="number" name="cvc">
+                        <input placeholder="Card number" type="tel" name="number" required>
+                        <input placeholder="Full name" type="text" name="name" required>
+                        <input placeholder="MM/YY" type="tel" name="expiry" required>
+                        <input placeholder="CVV" type="number" name="cvc" required>
                         <h4><b>Amount: &#8377;{{ totalCost }}</b></h4>
+                        {% if login == False %}
+                        <button type="button" class="btn btn-success" name="button" onclick="alert('Please login first')">Pay now</button>
+                        {% else %}
                         <button type="submit" class="btn btn-success" name="button">Pay now</button>
+                        {% endif %}
                     </form>
                 </div>
             </div>
