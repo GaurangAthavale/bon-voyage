@@ -8,6 +8,10 @@ from flask import Flask, render_template, request, redirect
 from pprint import pprint
 from datetime import date
 from random import randint
+import smtplib, ssl
+port = 465  # For SSL
+# Create a secure SSL context
+context = ssl.create_default_context()
 
 config = {
     "apiKey": "AIzaSyAiPuEH6tsR4h36GJKDzKtv87-2E9u0_oA",
@@ -15,6 +19,9 @@ config = {
     "databaseURL": "https://bon-voyage-d2ff1.firebaseio.com",
     "storageBucket": "bon-voyage-d2ff1.appspot.com"
 }
+
+sender_email = "bonvoyage6566@gmail.com"
+sender_pw = "1711065and66"
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
@@ -25,6 +32,7 @@ check = {}
 #global variables
 loggedIn = False
 userId = None
+userEmail = None
 flights = []
 clas = 'economy'
 pax = '1'
@@ -303,6 +311,7 @@ def checkout():
 def login():
     global loggedIn
     global userId
+    global userEmail
     # verification = False
     unsucessful = 'Please enter correct credentials!'
     if(request.method == 'POST'):
@@ -330,6 +339,8 @@ def login():
                         print(user.key())
                         userId = user.key()
                 print(userId)
+                userEmail = email
+                print(userEmail)
                 return render_template('index.html',s=successful, login = True)
         except:
             return render_template('login.html', us=unsucessful, login = False)
@@ -339,6 +350,7 @@ def login():
 def logout():
     global loggedIn
     userId = None
+    userEmail = None
     loggedIn = False
     return render_template('index.html', login = False)
 
@@ -407,7 +419,13 @@ def pay():
             booked_tr = []
             booked_fl = []
             booked_ht = []
-            return render_template('index.html', s="Your booking has been done")
+            with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+                server.login(sender_email, sender_pw)
+                receiver_email = userEmail
+                message = """Subject: Bon Voyage Booking Details
+                Your booking has been done, thank you for using Bon Voyage!"""
+                server.sendmail(sender_email, receiver_email, message)
+            return render_template('index.html', s="Your booking has been done", login = loggedIn)
         else:
             pprint(booked_ht)
             pprint(booked_fl)
