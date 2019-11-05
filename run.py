@@ -344,6 +344,21 @@ def pay():
         print(cvv)
         print(expiry, mon, yr)
         valid = False
+        cards = db.child("pay-cards").get()
+        if cards is None:
+            print('no cards')
+        else:
+            for card in cards.each():
+                print(card.key())
+                if(number == card.key()):  
+                    print('number matched')
+                    if(name == card.val()['name'].lower()):
+                        print('name matched')
+                        if(mon == card.val()['card_month'] and yr == card.val()['card_year']):
+                            print('expiry matched')
+                            if(cvv == card.val()['cvv']):
+                                print('cvv matched')
+                                valid = True
         if valid:
             return redirect('/')
         else:
